@@ -1,0 +1,52 @@
+# Download Biosamples:
+1. Install sratoolkit via homebrew: brew install sratoolkit
+2. Metagenomic sequences were tested from two projects:
+    - [Greenland Ice Sheet supraglacial habitats...](https://www.ncbi.nlm.nih.gov/bioproject/942590)
+    - [A Novel Bat Coronavirus Closely Related to SARS-CoV-2...](https://www.ncbi.nlm.nih.gov/bioproject?LinkName=sra_bioproject&from_uid=11604432)
+2. To download the metagenomic samples from either bioproject:
+    - 'prefetch SRR...'
+    - 'fastq-dump <sra file>'
+    - Note: These files, by default, will download into a directory named 'ncbi' at the root of your file system. 
+- SRR24581285: cryoconite 
+    - https://www.ncbi.nlm.nih.gov/sra/SRX20364643[accn]
+- SRR24581281: biofilm
+    - https://www.ncbi.nlm.nih.gov/sra/SRX20364649
+- SSR12464727: Feces from Rhinolophus malayanus bats (bat sample 1)
+    - https://www.ncbi.nlm.nih.gov/sra/SRX8958936%5Baccn%5D
+- SRR12432009: Rhinolophus malayanus bats: feces samples (bat sample 2)
+
+### Download Viral Data:
+1. Download 2000 random viruses from: https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/virus?SeqType_s=Nucleotide
+    - 6000 random viruses were downloaded for the development and testing of this project
+    - Columns selected were: Accession number, Organism Name
+    b. Download the Nucleocytoviricota refseq genomes from: https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/virus?SeqType_s=Genome&VirusLineage_ss=Nucleocytoviricota,%20taxid:2732007
+        - These are the viruses that were found in the red snow alge from: https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-024-01796-y
+
+### Download NCLDV Marker Genes:
+1. Locate the marker genes @:
+    - PolB (DNA polymerase elongation subunit family B): https://www.genome.jp/entry/elp:P12B_c0053
+    - mRNAc (mRNA-capping enzyme): https://www.genome.jp/entry/hsa:8732
+    - RNApl (RNA polymerase large subunit): https://www.genome.jp/entry/cqu:CpipJ_CPIJ018338
+    - RNAps (RNA polymerase small subunit): https://www.genome.jp/entry/sbia:133503957
+    - RNR/SFII (DNA or RNA helicases of superfamily II): https://www.genome.jp/entry/aor:AO090005000418
+    - VLTF3 (poxvirus late transcription factor VLTF3 like): https://www.genome.jp/entry/vg:26049060
+    - A32 (packaging ATPase): https://www.ncbi.nlm.nih.gov/gene/11464360
+    - D5 (D5-like helicase-primase): https://www.ncbi.nlm.nih.gov/gene/54974987
+2. Download NCBI sequences @: https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/virus?SeqType_s=Nucleotide
+3. Copy and paste the 8 NCLDV marker gene KEGG sequences into separate files in src/data/virus_data with the corresponding names:
+    - RNAplGeneFile = "kegg_RNApl.fasta"
+    - RNApsGeneFile = "kegg_RNAps.fasta"
+    - mRNAcGeneFile = "kegg_mRNAc.fasta"
+    - RNRSFIIGeneFile = "kegg_RNRSFII.fasta"
+    - VLTF3GeneFile = "kegg_VLTF3.fasta"
+    - PolBGeneFile = "kegg_polB.fasta"
+
+### Download Bat Virus Data:
+1. [SARS-CoV-2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512) or by going to [NCBI Virus](https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/virus?VirusLineage_ss=Viruses,%20taxid:10239&SeqType_s=Nucleotide) and search for Accession #: NC_045512
+
+
+### Supporting references:
+    - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7136201/
+        Moniruzzaman M, Martinez-Gutierrez CA, Weinheimer AR, Aylward FO. Dynamic genome evolution and complex virocell metabolism of globally-distributed giant viruses. Nat Commun. 2020 Apr 6;11(1):1710. doi: 10.1038/s41467-020-15507-2. PMID: 32249765; PMCID: PMC7136201.
+
+    - https://github.com/faylward/ncldv_markersearch/blob/master/hmm/NCLDV.list

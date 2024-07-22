@@ -1,0 +1,36 @@
+Main: 
+	BioSample File: biofilm_subset_first100.fastq
+	Size of K = 35
+Import Viruses: 
+	There are 4 viruses in this dataset
+Quality Control: 
+	# of cleaned reads: 100
+	Average read length: 285.75
+	Minimum read length: 238
+	Maximum read length: 302
+Time Stamp: Reads to Kmers finished in 0.017377138137817383
+Time Stamp: DeBruijn Graph finished in 0.020070791244506836
+Create Contigs: 
+	Number of start nodes: 100
+	Number of end nodes: 98
+	Average contig length: 288.11311969323475
+	Total number of contigs: [3651]
+	Minimum contig length: 197
+	Maximum contig length: 360
+Time Stamp: Create Contigs finished in 0.7725958824157715
+Search For Viruses:
+
+	0 contigs align with Human immunodeficiency virus 1 
+	Virus Human immunodeficiency virus 1 split time: 263.17962980270386
+	Virus: Human immunodeficiency virus 1 length: 351bp
+	0 contigs align with Measles morbillivirus 
+	Virus Measles morbillivirus split time: 350.5549659729004
+	Virus: Measles morbillivirus length: 456bp
+	0 contigs align with Norovirus GII 
+	Virus Norovirus GII split time: 499.8949718475342
+	Virus: Norovirus GII length: 637bp
+	0 contigs align with Coxsackievirus A16 
+	Virus Coxsackievirus A16 split time: 710.5378420352936
+	Virus: Coxsackievirus A16 length: 891bp
+Time Stamp: Find Viruses finished in 1824.2619888782501
+Project execution time: 1825.5147082805634

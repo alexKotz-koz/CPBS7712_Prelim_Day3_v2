@@ -1,0 +1,39 @@
+Virome Report:
+
+Biosample Information:
+	Number of Reads in Original Biosample File: 100
+	Number of Reads in Biosample after Quality Control: 100
+
+	Average Read Length after Quality Control: 290.13 bp
+	Minimum Read Length after Quality Control: 229 bp
+	Maximum Read Length after Quality Control: 302 bp
+
+Shannon Diversity Index for cryoconite_subset_third100.fastq community: 0
+
+Virus Abundance in cryoconite_subset_third100.fastq:
+{
+    "D5": {
+        "abundance": 0.0
+    },
+    "A32": {
+        "abundance": 0.0
+    },
+    "VLTF3": {
+        "abundance": 0.0
+    },
+    "RNAps": {
+        "abundance": 0.0
+    },
+    "mRNAc": {
+        "abundance": 0.0
+    },
+    "RNR/SFII": {
+        "abundance": 0.0
+    },
+    "PolB": {
+        "abundance": 0.0
+    },
+    "RNApl": {
+        "abundance": 0.0
+    }
+}

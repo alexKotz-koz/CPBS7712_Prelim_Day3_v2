@@ -1,0 +1,34 @@
+Virus dataset,Metagenomic Sample,Number of Reads,Location of Reads,Total Execution Time,Total Number of Contigs,Average Length of Contig,Min Length of Contig,Max Length of Contig,Size of K
+8 NCLVD Genes,Cryoconite,100,301-400,1297,322,285.9,179,333,45
+8 NCLVD Genes,Biofilm,100,301-400,4281,1090,280.4,198,371,45
+8 NCLVD Genes,Cryoconite,50,1-50,608,182,282.7,180,338,35
+8 NCLVD Genes,Biofilm,50,1-50,3084,902,291.5,213,360,35
+8 NCLVD Genes,Cryoconite,50,51-100,473,140,288.3,235,340,35
+8 NCLVD Genes,Biofilm,50,51-100,2014,623,277.5,197,352,35
+8 NCLVD Genes,Biofilm,50,51-100,1830,512,277.1,197,348,40
+4 NCBI Viruses,Cryoconite,100,1-100,270,562,284.5,180,344,35
+4 NCBI Viruses,Biofilm,100,1-100,1825,3651,288.1,197,360,35
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,

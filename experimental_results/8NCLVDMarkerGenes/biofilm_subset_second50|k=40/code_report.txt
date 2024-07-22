@@ -1,0 +1,19 @@
+Code Report: 
+
+Biosample File: biofilm_subset_second50.fastq
+Size of User-defined K: 40
+
+Component Execution Times: 
+	importBioSample.py completed in 0.0007109642028808594 seconds
+	importVirus.py completed in 0.0013408660888671875 seconds
+	qc.py completed in 0.00462794303894043 seconds
+	readsToKmers.py completed in 0.01445317268371582 seconds
+	deBruijnGraph.py completed in 0.0030121803283691406 seconds
+	createContigs.py completed in 0.11911702156066895 seconds
+	searchForViruses.py completed in 1830.1675839424133 seconds
+
+Contig Information: 
+	Total Number of contigs created: 512
+	Minimum Contig Length: 197 bp's
+	Maximum Contig Length: 348 bp's
+	Average Contig Length: 277.052734375 bp

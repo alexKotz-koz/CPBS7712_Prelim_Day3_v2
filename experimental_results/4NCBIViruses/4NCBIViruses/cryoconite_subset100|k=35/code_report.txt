@@ -1,0 +1,19 @@
+Code Report: 
+
+Biosample File: cryoconite_subset_first100.fastq
+Size of User-defined K: 35
+
+Component Execution Times: 
+	importBioSample.py completed in 0.0005738735198974609 seconds
+	importVirus.py completed in 0.00022029876708984375 seconds
+	qc.py completed in 0.005677700042724609 seconds
+	readsToKmers.py completed in 0.018119096755981445 seconds
+	deBruijnGraph.py completed in 0.022996187210083008 seconds
+	createContigs.py completed in 0.15388798713684082 seconds
+	searchForViruses.py completed in 270.40846514701843 seconds
+
+Contig Information: 
+	Total Number of contigs created: 562
+	Minimum Contig Length: 180 bp's
+	Maximum Contig Length: 344 bp's
+	Average Contig Length: 284.4946619217082 bp

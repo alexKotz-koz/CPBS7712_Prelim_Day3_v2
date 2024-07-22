@@ -1,0 +1,16 @@
+{
+    "GGCCAAGCTCGATGCCGAAATCAAGGCCAGGGCCGTAGACATCAA": {
+        "@SRR24581287.201": [
+            {
+                "0": 45
+            }
+        ]
+    },
+    "GCCAAGCTCGATGCCGAAATCAAGGCCAGGGCCGTAGACATCAAC": {
+        "@SRR24581287.201": [
+            {
+                "1": 46
+            }
+        ]
+    }
+}

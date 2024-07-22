@@ -1,0 +1,48 @@
+Main: 
+	BioSample File: biofilm_subset_first50.fastq
+	Size of K = 35
+Import Viruses: 
+	There are 8 viruses in this dataset
+Quality Control: 
+	# of cleaned reads: 50
+	Average read length: 288.28
+	Minimum read length: 238
+	Maximum read length: 302
+Time Stamp: Reads to Kmers finished in 0.014650821685791016
+Time Stamp: DeBruijn Graph finished in 0.003337383270263672
+Create Contigs: 
+	Number of start nodes: 50
+	Number of end nodes: 49
+	Average contig length: 291.490022172949
+	Total number of contigs: [902]
+	Minimum contig length: 213
+	Maximum contig length: 360
+Time Stamp: Create Contigs finished in 0.19037890434265137
+Search For Viruses:
+
+	0 contigs align with D5 
+	Virus D5 split time: 150.0185570716858
+	Virus: D5 length: 768bp
+	0 contigs align with A32 
+	Virus A32 split time: 196.79453587532043
+	Virus: A32 length: 996bp
+	0 contigs align with VLTF3 
+	Virus VLTF3 split time: 221.3447983264923
+	Virus: VLTF3 length: 1119bp
+	0 contigs align with RNAps 
+	Virus RNAps split time: 303.64345598220825
+	Virus: RNAps length: 1518bp
+	0 contigs align with mRNAc 
+	Virus mRNAc split time: 360.56790804862976
+	Virus: mRNAc length: 1794bp
+	0 contigs align with RNR/SFII 
+	Virus RNR/SFII split time: 399.98987317085266
+	Virus: RNR/SFII length: 1989bp
+	0 contigs align with PolB 
+	Virus PolB split time: 419.5072877407074
+	Virus: PolB length: 2085bp
+	0 contigs align with RNApl 
+	Virus RNApl split time: 1031.5285239219666
+	Virus: RNApl length: 5079bp
+Time Stamp: Find Viruses finished in 3083.4594271183014
+Project execution time: 3084.0091269016266

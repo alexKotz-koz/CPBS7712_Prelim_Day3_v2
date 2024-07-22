@@ -1,0 +1,27 @@
+Virome Report:
+
+Biosample Information:
+	Number of Reads in Original Biosample File: 100
+	Number of Reads in Biosample after Quality Control: 100
+
+	Average Read Length after Quality Control: 285.75 bp
+	Minimum Read Length after Quality Control: 238 bp
+	Maximum Read Length after Quality Control: 302 bp
+
+Shannon Diversity Index for biofilm_subset_first100.fastq community: 0
+
+Virus Abundance in biofilm_subset_first100.fastq:
+{
+    "Human immunodeficiency virus 1": {
+        "abundance": 0.0
+    },
+    "Measles morbillivirus": {
+        "abundance": 0.0
+    },
+    "Norovirus GII": {
+        "abundance": 0.0
+    },
+    "Coxsackievirus A16": {
+        "abundance": 0.0
+    }
+}

@@ -1,0 +1,12 @@
+.DS_Store
+src/__pycache__
+src/components/__pycache__
+src/utils/__pycache__
+tests/__pycache__
+venv
+src/data/biosample_data/biofilm
+src/data/biosample_data/cryoconite
+src/data/virus_data
+src/data/output_data/contigs.txt
+src/data/bacteria_data
+src/data/biosample_data/bat
