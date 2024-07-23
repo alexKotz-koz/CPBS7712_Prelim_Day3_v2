@@ -1,0 +1,66 @@
+Virome Report:
+
+Biosample Information:
+	Number of Reads in Original Biosample File: 145
+	Number of Reads in Biosample after Quality Control: 145
+
+	Average Read Length after Quality Control: 30.420689655172414 bp
+	Minimum Read Length after Quality Control: 29 bp
+	Maximum Read Length after Quality Control: 32 bp
+
+Shannon Diversity Index for bat1_total_subset_2_sliding_window_subset_4.fastq community: 0
+
+Virus Abundance in bat1_total_subset_2_sliding_window_subset_4.fastq:
+{
+    "RmYN02 F Primer 3": {
+        "abundance": 0.0
+    },
+    "RmYN02 R Primer 3": {
+        "abundance": 0.0
+    },
+    "RmYN02 R Primer 5": {
+        "abundance": 0.0
+    },
+    "RmYN02 R Primer 1": {
+        "abundance": 0.0
+    },
+    "RmYN02 R Primer 4": {
+        "abundance": 0.0
+    },
+    "RmYN02 F Primer 6": {
+        "abundance": 0.0
+    },
+    "RmYN02 F Primer 7": {
+        "abundance": 0.0
+    },
+    "RmYN02 R Primer 8": {
+        "abundance": 0.0
+    },
+    "RmYN02 F Primer 1": {
+        "abundance": 0.0
+    },
+    "RmYN02 F Primer 2": {
+        "abundance": 0.0
+    },
+    "RmYN02 R Primer 2": {
+        "abundance": 0.0
+    },
+    "RmYN02 F Primer 4": {
+        "abundance": 0.0
+    },
+    "RmYN02 F Primer 5": {
+        "abundance": 0.0
+    },
+    "RmYN02 R Primer 6": {
+        "abundance": 0.0
+    },
+    "RmYN02 R Primer 7": {
+        "abundance": 0.0
+    },
+    "RmYN02 F Primer 8": {
+        "abundance": 0.0
+    },
+    "RmYN02 probe": {
+        "abundance": 0.0
+    }
+}

@@ -55,7 +55,6 @@ class ImportVirus:
         virusDataDict = dict(
             sorted(virusDataDict.items(), key=lambda item: len(item[1]["sequence"]))
         )
-        print(virusDataDict)
 
         logging.info(f"Import Viruses: ")
         logging.info(f"\tThere are {len(virusDataDict)} viruses in this dataset")

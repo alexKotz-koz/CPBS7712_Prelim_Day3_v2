@@ -25,7 +25,7 @@ class SearchString:
             readsKmerPool = json.load(file)
         self.readsKmerPool = readsKmerPool
         self.k = k
-        self.maxHammingDistance = 2
+        self.maxHammingDistance = 4
 
     # Input: virus sequence
     # Output: virus kmer pool

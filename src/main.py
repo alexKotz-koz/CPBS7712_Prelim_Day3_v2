@@ -125,7 +125,7 @@ def main():
         os.path.join(virusDataDir, RNRSFIIGeneFile),
         os.path.join(virusDataDir, VLTF3GeneFile),
     ]
-    allVirusDataFileLocations = [
+    allGlacialVirusDataFileLocations = [
         os.path.join(virusDataDir, virusFile),
         os.path.join(virusDataDir, virusFile2),
         os.path.join(virusDataDir, virusFile3),
@@ -133,7 +133,7 @@ def main():
         os.path.join(virusDataDir, NCLDVFile),
     ]
     batVirusFileLocations = [
-        os.path.join(virusDataDir, sarsCoV2File),
+        #os.path.join(virusDataDir, sarsCoV2File),
         os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer1),
         os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer1),
         os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer2),
@@ -237,10 +237,10 @@ def main():
     logging.info(f"Time Stamp: Find Viruses finished in {sfvTotal}")
     print(f"Time Stamp: Find Viruses finished in {sfvTotal}")
 
-    viromeReportInstance = ViromeReport(
-        contigs, virusesInBiosample, biosampleFile, qcMetadata
-    )
-    viromeReportInstance.generateReport()
+    #viromeReportInstance = ViromeReport(
+    #    contigs, virusesInBiosample, biosampleFile, qcMetadata
+    #)
+    #viromeReportInstance.generateReport()
 
 
 if __name__ == "__main__":
