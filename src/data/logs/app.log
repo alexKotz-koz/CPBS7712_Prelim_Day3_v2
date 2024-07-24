@@ -1,135 +1,60 @@
 Main: 
-	BioSample File: bat1_total_subset_1_sliding_window_subset_1.fastq
+	BioSample File: bat1_total_subset_10_sliding_window_subset_1.fastq
 	Size of K = 35
 
 Import Viruses: 
-	There are 17 viruses in this dataset
+	There are 4 viruses in this dataset
 
 Quality Control: 
-	# of cleaned reads: 150
-	Average read length: 144.58666666666667
-	Minimum read length: 93
+	# of cleaned reads: 10
+	Average read length: 148.5
+	Minimum read length: 146
 	Maximum read length: 150
-Time Stamp: Reads to Kmers finished in 0.0047757625579833984
-Time Stamp: DeBruijn Graph finished in 0.0024330615997314453
+Time Stamp: Reads to Kmers finished in 0.0005409717559814453
+Time Stamp: DeBruijn Graph finished in 0.0003941059112548828
 
 Create Contigs: 
-	Number of start nodes: 86
-	Number of end nodes: 116
-	Average contig length: 196.8910196445276
-	Minimum contig length: 44
-	Maximum contig length: 355
-	Total number of contigs: [2138]
-Time Stamp: Create Contigs finished in 0.14490509033203125
+	Number of start nodes: 6
+	Number of end nodes: 8
+	Average contig length: 183.8125
+	Minimum contig length: 119
+	Maximum contig length: 276
+	Total number of contigs: [16]
+Time Stamp: Create Contigs finished in 0.0028581619262695312
 
 Search For Viruses:
 
 	Search String Logging
 
-	Virus To Kmers: 8.106231689453125e-06.
+	Virus To Kmers: 0.028760194778442383.
 		*Note: This creates kmer pools for all viruses before creating the contigs for each individual virus.
-	RmYN02 F Primer 3:
+	Lake Victoria marburgvirus strain Uganda 01Uga07:
 
-	Create Contigs: 0.013275861740112305
-		0 contigs align with RmYN02 F Primer 3 
-		Virus RmYN02 F Primer 3 split time: 0.01338815689086914
-		Virus: RmYN02 F Primer 3 length: 19bp
-	RmYN02 R Primer 3:
+	Create Contigs: 40.218849658966064
+		0 contigs align with Lake Victoria marburgvirus strain Uganda 01Uga07 
+		Virus Lake Victoria marburgvirus strain Uganda 01Uga07 split time: 40.219318866729736
+		Virus: Lake Victoria marburgvirus strain Uganda 01Uga07 length: 19114bp
+	Bat coronavirus RaTG13:
 
-	Create Contigs: 0.013652324676513672
-		0 contigs align with RmYN02 R Primer 3 
-		Virus RmYN02 R Primer 3 split time: 0.013754844665527344
-		Virus: RmYN02 R Primer 3 length: 19bp
-	RmYN02 R Primer 5:
+	Create Contigs: 63.00771188735962
+		0 contigs align with Bat coronavirus RaTG13 
+		Virus Bat coronavirus RaTG13 split time: 63.00801110267639
+		Virus: Bat coronavirus RaTG13 length: 29855bp
+	Severe acute respiratory syndrome coronavirus 2:
 
-	Create Contigs: 0.013644695281982422
-		0 contigs align with RmYN02 R Primer 5 
-		Virus RmYN02 R Primer 5 split time: 0.013759851455688477
-		Virus: RmYN02 R Primer 5 length: 20bp
-	RmYN02 R Primer 1:
+	Create Contigs: 62.86016082763672
+		0 contigs align with Severe acute respiratory syndrome coronavirus 2 
+		Virus Severe acute respiratory syndrome coronavirus 2 split time: 62.860419034957886
+		Virus: Severe acute respiratory syndrome coronavirus 2 length: 29903bp
+	Middle East respiratory syndrome-related coronavirus:
 
-	Create Contigs: 0.013712167739868164
-		0 contigs align with RmYN02 R Primer 1 
-		Virus RmYN02 R Primer 1 split time: 0.013833045959472656
-		Virus: RmYN02 R Primer 1 length: 21bp
-	RmYN02 R Primer 4:
-
-	Create Contigs: 0.013875007629394531
-		0 contigs align with RmYN02 R Primer 4 
-		Virus RmYN02 R Primer 4 split time: 0.013984918594360352
-		Virus: RmYN02 R Primer 4 length: 22bp
-	RmYN02 F Primer 6:
-
-	Create Contigs: 0.013668060302734375
-		0 contigs align with RmYN02 F Primer 6 
-		Virus RmYN02 F Primer 6 split time: 0.013808965682983398
-		Virus: RmYN02 F Primer 6 length: 22bp
-	RmYN02 F Primer 7:
-
-	Create Contigs: 0.013624191284179688
-		0 contigs align with RmYN02 F Primer 7 
-		Virus RmYN02 F Primer 7 split time: 0.0137176513671875
-		Virus: RmYN02 F Primer 7 length: 22bp
-	RmYN02 R Primer 8:
-
-	Create Contigs: 0.013468027114868164
-		0 contigs align with RmYN02 R Primer 8 
-		Virus RmYN02 R Primer 8 split time: 0.013590097427368164
-		Virus: RmYN02 R Primer 8 length: 22bp
-	RmYN02 F Primer 1:
-
-	Create Contigs: 0.01387786865234375
-		0 contigs align with RmYN02 F Primer 1 
-		Virus RmYN02 F Primer 1 split time: 0.014011859893798828
-		Virus: RmYN02 F Primer 1 length: 23bp
-	RmYN02 F Primer 2:
-
-	Create Contigs: 0.013924121856689453
-		0 contigs align with RmYN02 F Primer 2 
-		Virus RmYN02 F Primer 2 split time: 0.014039039611816406
-		Virus: RmYN02 F Primer 2 length: 23bp
-	RmYN02 R Primer 2:
-
-	Create Contigs: 0.013849258422851562
-		0 contigs align with RmYN02 R Primer 2 
-		Virus RmYN02 R Primer 2 split time: 0.013955831527709961
-		Virus: RmYN02 R Primer 2 length: 23bp
-	RmYN02 F Primer 4:
-
-	Create Contigs: 0.013442039489746094
-		0 contigs align with RmYN02 F Primer 4 
-		Virus RmYN02 F Primer 4 split time: 0.01355600357055664
-		Virus: RmYN02 F Primer 4 length: 23bp
-	RmYN02 F Primer 5:
-
-	Create Contigs: 0.03539013862609863
-		0 contigs align with RmYN02 F Primer 5 
-		Virus RmYN02 F Primer 5 split time: 0.03550291061401367
-		Virus: RmYN02 F Primer 5 length: 23bp
-	RmYN02 R Primer 6:
-
-	Create Contigs: 0.013375043869018555
-		0 contigs align with RmYN02 R Primer 6 
-		Virus RmYN02 R Primer 6 split time: 0.01347804069519043
-		Virus: RmYN02 R Primer 6 length: 23bp
-	RmYN02 R Primer 7:
-
-	Create Contigs: 0.0136566162109375
-		0 contigs align with RmYN02 R Primer 7 
-		Virus RmYN02 R Primer 7 split time: 0.013766050338745117
-		Virus: RmYN02 R Primer 7 length: 23bp
-	RmYN02 F Primer 8:
-
-	Create Contigs: 0.013545989990234375
-		0 contigs align with RmYN02 F Primer 8 
-		Virus RmYN02 F Primer 8 split time: 0.013646125793457031
-		Virus: RmYN02 F Primer 8 length: 25bp
-	RmYN02 probe:
-
-	Create Contigs: 0.013695955276489258
-		0 contigs align with RmYN02 probe 
-		Virus RmYN02 probe split time: 0.013814210891723633
-		Virus: RmYN02 probe length: 28bp
-Time Stamp: Find Viruses finished in 0.4075791835784912
-Project execution time: 1.0188798904418945
+	Create Contigs: 63.65182900428772
+		0 contigs align with Middle East respiratory syndrome-related coronavirus 
+		Virus Middle East respiratory syndrome-related coronavirus split time: 63.65297198295593
+		Virus: Middle East respiratory syndrome-related coronavirus length: 30119bp
+Time Stamp: Find Viruses finished in 229.77459692955017
+Project execution time: 229.9228959083557
 ____________________________________________________________________
+______________________________________________________
+Date: 2024-07-24 12:54:13
+Total execution time of the script: 231 seconds.

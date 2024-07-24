@@ -1,5 +1,5 @@
 [{
-    "virusName": "SARS-CoV-2",
+    "virusName": "Severe acute respiratory syndrome coronavirus 2",
     "Realm": "Riboviria",
     "Kingdom": "Orthornavirae",
     "Phylum": "Pisuviricota",
@@ -13,7 +13,7 @@
     "Species": "Severe acute respiratory syndrome-related coronavirus"
 },
 {
-    "virusName": "SARS-CoV-2",
+    "virusName": "Bat coronavirus RaTG13",
     "Realm": "Riboviria",
     "Kingdom": "Orthornavirae",
     "Phylum": "Pisuviricota",
@@ -28,7 +28,7 @@
     "Strain": "RaTG13"
   },
 {
-    "virusName": "MERS-CoV",
+    "virusName": "Middle East respiratory syndrome-related coronavirus",
     "Realm": "Riboviria",
     "Kingdom": "Orthornavirae",
     "Phylum": "Pisuviricota",
@@ -40,6 +40,18 @@
     "Genus": "Betacoronavirus",
     "Subgenus": "Merbecovirus"
   },
+  {
+    "virusName": "Lake Victoria marburgvirus strain Uganda 01Uga07",
+    "Realm": "Riboviria",
+    "Kingdom": "Orthornavirae",
+    "Phylum": "Negarnaviricota",
+    "Subphylum": "Haploviricotina",
+    "Class": "Monjiviricetes",
+    "Order": "Mononegavirales",
+    "Family": "Filoviridae",
+    "Genus": "Orthomarburgvirus",
+    "Species": "Orthomarburgvirus marburgense"
+  },  
   {
     "virusName": "RmYN02 F Primer 1",
     "Realm": "Riboviria",

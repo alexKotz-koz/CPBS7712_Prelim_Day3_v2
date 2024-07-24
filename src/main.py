@@ -93,6 +93,7 @@ def main():
     sarsCoV2File = "SarsCoV2.fasta"
     mersCoVFile = "MERS-CoV.fasta"
     ratg13File = "RaTG13.fasta"
+    marburgFile = "Marburg.fasta"
     RmYN02FPrimer1 = "RmYN02FPrimer1.fasta"
     RmYN02RPrimer1 = "RmYN02RPrimer1.fasta"
     RmYN02FPrimer2 = "RmYN02FPrimer2.fasta"
@@ -132,26 +133,27 @@ def main():
         os.path.join(virusDataDir, NCLDVFile),
     ]
     batVirusFileLocations = [
-        # os.path.join(virusDataDir, sarsCoV2File),
-        # os.path.join(virusDataDir, mersCoVFile),
-        # os.path.join(virusDataDir, ratg13File),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer1),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer1),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer2),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer2),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer3),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer3),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer4),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer4),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer5),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer5),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer6),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer6),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer7),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer7),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer8),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer8),
-        os.path.join(RmYN02PrimersDataDir, RmYN02Probe),
+        os.path.join(virusDataDir, sarsCoV2File),
+        os.path.join(virusDataDir, mersCoVFile),
+        os.path.join(virusDataDir, ratg13File),
+        os.path.join(virusDataDir, marburgFile),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer1),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer1),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer2),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer2),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer3),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer3),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer4),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer4),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer5),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer5),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer6),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer6),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer7),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer7),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer8),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer8),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02Probe),
     ]
     syntheticVirusFileLocation = [
         os.path.join(os.path.join(dataDir, "synthetic_data"), "synthetic_virus.fasta")
@@ -242,7 +244,7 @@ def main():
     print(f"Time Stamp: Find Viruses finished in {sfvTotal}")
 
     viromeReportInstance = ViromeReport(
-        contigs, virusesInBiosample, biosampleFile, qcMetadata, virusDataFileLocations
+        contigs, virusesInBiosample, biosampleFile, qcMetadata
     )
     viromeReportInstance.generateReport()
 

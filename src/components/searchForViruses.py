@@ -26,14 +26,14 @@ class SearchString:
             readsKmerPool = json.load(file)
         self.readsKmerPool = readsKmerPool
         self.k = k
-        self.maxHammingDistance = 4
+        self.maxHammingDistance = 2
 
     # Input: virus sequence
     # Output: virus kmer pool
     def virusToKmers(self, sequence):
         kmerPool = {}
-        
-        #TODO: refactor to substitute with utils.toKmers()
+
+        # TODO: refactor to substitute with utils.toKmers()
         for index in range(len(sequence) - self.k + 1):
             kmer = sequence[index : index + self.k]
             if kmer not in kmerPool:
@@ -58,9 +58,9 @@ class SearchString:
 
     # Input: virus k-mer pool and virus object
     # Output: Contigs info object contain information about each contig k-mer that aligned (or didn't align) with each virus
-    
+
     # 7/23/24 21:16 | removing virus arg, doesn't look like its being used
-        # original: def createContigsInfo(self, virus, virusKmerPool)
+    # original: def createContigsInfo(self, virus, virusKmerPool)
     def createContigsInfo(self, virusKmerPool):
         contigsInfo = []
         for id, contig in enumerate(self.contigs):
@@ -82,6 +82,7 @@ class SearchString:
                 "length": contigLen,
                 "v-kmers": [],
             }
+
             for virusKmer in virusKmerPool:
                 for contigKmer in contigKmers:
                     distance = self.hammingDistance(virusKmer, contigKmer)
@@ -116,7 +117,9 @@ class SearchString:
             for virus_id, virus in self.viruses.items()
         }
         breakKmersEnd = time.time()
-        logging.info(f"\tVirus To Kmers: {breakKmersEnd-breakKmersStart}.\n\t\t*Note: This creates kmer pools for all viruses before creating the contigs for each individual virus.")
+        logging.info(
+            f"\tVirus To Kmers: {breakKmersEnd-breakKmersStart}.\n\t\t*Note: This creates kmer pools for all viruses before creating the contigs for each individual virus."
+        )
 
         for virusId, virus in self.viruses.items():
             vStart = time.time()
@@ -124,10 +127,10 @@ class SearchString:
             contigsTested = []
             virusKmerPool = virusKmerPools[virusId]
             logging.info(f"\t{virus['name']}:\n")
-            
+
             createContigsStart = time.time()
             # 7/23/24 21:16 | removed virus["name"] from self.createContigsInfo call
-            #original: contigsInfo = self.createContigsInfo(virus["name"], virusKmerPool)
+            # original: contigsInfo = self.createContigsInfo(virus["name"], virusKmerPool)
             contigsInfo = self.createContigsInfo(virusKmerPool)
             createContigsEnd = time.time()
             logging.info(f"\tCreate Contigs: {createContigsEnd-createContigsStart}")
@@ -152,8 +155,9 @@ class SearchString:
                 f"\t\t{len(contigsExistInVirus)} contigs align with {virus['name']} "
             )
             logging.info(f"\t\tVirus {virus['name']} split time: {vStop-vStart}")
-            logging.info(f"\t\tVirus: {virus['name']} length: {len(virus['sequence'])}bp")
-
+            logging.info(
+                f"\t\tVirus: {virus['name']} length: {len(virus['sequence'])}bp"
+            )
 
         with open("data/output_data/virusesInBiosample.json", "w") as file:
             json.dump(virusesInBiosample, file)

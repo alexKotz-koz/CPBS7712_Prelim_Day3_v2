@@ -19,13 +19,11 @@ class ViromeReport:
         virusesInBiosample,
         biosampleFile,
         qcMetadata,
-        virusDataFileLocations,
     ):
         self.contigs = contigs
         self.virusesInBiosample = virusesInBiosample
         self.biosampleFile = biosampleFile
         self.qcMetadata = qcMetadata
-        self.virusDataFileLocations = virusDataFileLocations
         self.reportDir = "data/reports"
         scriptDir = os.path.dirname(os.path.dirname(__file__))
         dataDir = "data"
@@ -47,7 +45,7 @@ class ViromeReport:
             virusAbundance[vName] = {"abundance": vProportion * 100}
         return virusAbundance
 
-    def createPDF(self, biosampleDf, biosampleName, virusDf, ouputFileName):
+    def createPDF(self, biosampleDf, biosampleName, ouputFileName):
         with PdfPages(ouputFileName) as pdf:
             fig, ax = plt.subplots(figsize=(12, 4))
             ax.axis("tight")
@@ -63,32 +61,9 @@ class ViromeReport:
             biosample_table.scale(1.2, 1.2)
             pdf.savefig(fig, bbox_inches="tight")
 
-            # Create table for virus taxonomy information
-            fig, ax = plt.subplots(figsize=(25, 6))  # Increase figure size
-            ax.axis("tight")
-            ax.axis("off")
-            plt.title(
-                "Virus Taxonomic Classification and Abundance", fontsize=14, pad=20
-            )
-
-            # Create table for virus data
-            virus_table = ax.table(
-                cellText=virusDf.values,
-                colLabels=virusDf.columns,
-                loc="center",
-            )
-            virus_table.auto_set_font_size(False)
-            virus_table.set_fontsize(8)  # Reduce font size
-            virus_table.scale(1.0, 1.0)  # Reduce scaling
-            pdf.savefig(fig, bbox_inches="tight")
-
     def generateReport(self):
         reportFile = "virome_report.txt"
         biosampleFileName = self.biosampleFile.strip(".fastq")
-        virusDf = ""
-
-        virusAbundanceDf = pd.DataFrame(self.virusAbundance()).T.reset_index()
-        virusAbundanceDf.columns = ["Virus", "Abundance"]
 
         # QC metadata
         lengthOriginalBiosample = self.qcMetadata["lengthOriginalBiosample"]
@@ -105,16 +80,19 @@ class ViromeReport:
             batVirusDf["Relative Viral Abundance"] = np.nan
 
             for virus, abundance in self.virusAbundance().items():
-                batVirusDf.loc[virus, "Relative Viral Abundance"] = abundance[
-                    "abundance"
-                ]
+                if virus in batVirusDf.index:
+                    batVirusDf.loc[virus, "Relative Viral Abundance"] = abundance[
+                        "abundance"
+                    ]
+
+            # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
+            batVirusDf = batVirusDf[batVirusDf["Relative Viral Abundance"].notna()]
 
             batVirusDf.rename(columns={"virusName": "Virus Name"}, inplace=True)
             batVirusDf.to_csv(
                 os.path.join(self.reportDir, f"{biosampleFileName}_tax.csv"),
                 index_label="Virus Name",
             )
-            virusDf = batVirusDf
 
         biosampleInfo = {
             "Metric": [
@@ -136,7 +114,6 @@ class ViromeReport:
         self.createPDF(
             biosampleDf,
             biosampleFileName,
-            virusDf,
             os.path.join(self.reportDir, f"{biosampleFileName}.pdf"),
         )
 
