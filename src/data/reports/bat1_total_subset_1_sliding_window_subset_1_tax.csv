@@ -1,0 +1,22 @@
+Virus Name,Realm,Kingdom,Phylum,Class,Order,Suborder,Family,Subfamily,Genus,Subgenus,Species,Strain,Relative Viral Abundance
+SARS-CoV-2,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,Cornidovirineae,Coronaviridae,Orthocoronavirinae,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome-related coronavirus,,
+SARS-CoV-2,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,Cornidovirineae,Coronaviridae,Orthocoronavirinae,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome-related coronavirus,RaTG13,
+MERS-CoV,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,Cornidovirineae,Coronaviridae,Orthocoronavirinae,Betacoronavirus,Merbecovirus,,,
+RmYN02 F Primer 1,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 R Primer 1,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 F Primer 2,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 R Primer 2,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 F Primer 3,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 R Primer 3,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 F Primer 4,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 R Primer 4,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 F Primer 5,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 R Primer 5,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 F Primer 6,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 R Primer 6,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 F Primer 7,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 R Primer 7,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 F Primer 8,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 R Primer 8,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,0.0
+RmYN02 Probe,Riboviria,Orthornavirae,Pisuviricota,Pisoniviricetes,Nidovirales,,Coronaviridae,,Betacoronavirus,Sarbecovirus,Severe acute respiratory syndrome–related coronavirus,RmYN02,
+RmYN02 probe,,,,,,,,,,,,,0.0

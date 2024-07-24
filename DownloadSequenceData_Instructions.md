@@ -44,6 +44,7 @@
 ### Download Bat Virus Data:
 1. [SARS-CoV-2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512) or by going to [NCBI Virus](https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/virus?VirusLineage_ss=Viruses,%20taxid:10239&SeqType_s=Nucleotide) and search for Accession #: NC_045512
 2. [MERS-CoV](https://www.ncbi.nlm.nih.gov/nuccore/NC_019843.3?report=fasta), copy and paste sequence into a new file "MERS-CoV.fasta" and place the file into the src/data/virus_data sub-directory
+3. [SARS-CoV-2_RaTG13](https://www.ncbi.nlm.nih.gov/nuccore/MN996532.2?report=fasta), copy and paste sequence into a new file "RaTG13.fasta" and place the file into the src/data/virus_data sub-directory
 
 
 ### Supporting references:

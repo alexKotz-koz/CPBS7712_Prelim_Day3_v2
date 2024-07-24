@@ -2,6 +2,7 @@ import json
 import os
 import logging
 import time
+from components import utils
 
 logDir = "data/logs"
 os.makedirs(logDir, exist_ok=True)
@@ -31,6 +32,8 @@ class SearchString:
     # Output: virus kmer pool
     def virusToKmers(self, sequence):
         kmerPool = {}
+        
+        #TODO: refactor to substitute with utils.toKmers()
         for index in range(len(sequence) - self.k + 1):
             kmer = sequence[index : index + self.k]
             if kmer not in kmerPool:
@@ -55,13 +58,23 @@ class SearchString:
 
     # Input: virus k-mer pool and virus object
     # Output: Contigs info object contain information about each contig k-mer that aligned (or didn't align) with each virus
-    def createContigsInfo(self, virus, virusKmerPool):
+    
+    # 7/23/24 21:16 | removing virus arg, doesn't look like its being used
+        # original: def createContigsInfo(self, virus, virusKmerPool)
+    def createContigsInfo(self, virusKmerPool):
         contigsInfo = []
         for id, contig in enumerate(self.contigs):
             contigLen = len(contig)
+
+            """
+            7/23/24 21:19 | Replaced with call to util fx
+            original: 
             contigKmers = {
                 contig[i : i + self.k] for i in range(contigLen - self.k + 1)
             }
+            """
+            contigKmers = utils.toKmers(self.k, contig)
+
             kmerCount = 0
             contigInfo = {
                 "contigId": id + 1,
@@ -93,21 +106,31 @@ class SearchString:
     # Input: virus and contig objects
     # Output: information about the contigs that aligned (or didn't align) with each virus
     def searchString(self):
-        logging.info("Search For Viruses:\n")
+        logging.info("\nSearch For Viruses:\n")
         virusesInBiosample = []
         # break all viruses into kmers
+        logging.info(f"\tSearch String Logging\n")
+        breakKmersStart = time.time()
         virusKmerPools = {
             virus_id: self.virusToKmers(virus["sequence"])
             for virus_id, virus in self.viruses.items()
         }
+        breakKmersEnd = time.time()
+        logging.info(f"\tVirus To Kmers: {breakKmersEnd-breakKmersStart}.\n\t\t*Note: This creates kmer pools for all viruses before creating the contigs for each individual virus.")
 
         for virusId, virus in self.viruses.items():
             vStart = time.time()
             contigsExistInVirus = []
             contigsTested = []
             virusKmerPool = virusKmerPools[virusId]
-
-            contigsInfo = self.createContigsInfo(virus["name"], virusKmerPool)
+            logging.info(f"\t{virus['name']}:\n")
+            
+            createContigsStart = time.time()
+            # 7/23/24 21:16 | removed virus["name"] from self.createContigsInfo call
+            #original: contigsInfo = self.createContigsInfo(virus["name"], virusKmerPool)
+            contigsInfo = self.createContigsInfo(virusKmerPool)
+            createContigsEnd = time.time()
+            logging.info(f"\tCreate Contigs: {createContigsEnd-createContigsStart}")
 
             for contig in contigsInfo:
                 if contig["kmerCount"] > 0:
@@ -123,13 +146,14 @@ class SearchString:
             )
             vStop = time.time()
 
-            print(f"\t{len(contigsExistInVirus)} contigs align with {virus['name']} ")
+            print(f"\t\t{len(contigsExistInVirus)} contigs align with {virus['name']} ")
 
             logging.info(
-                f"\t{len(contigsExistInVirus)} contigs align with {virus['name']} "
+                f"\t\t{len(contigsExistInVirus)} contigs align with {virus['name']} "
             )
-            logging.info(f"\tVirus {virus['name']} split time: {vStop-vStart}")
-            logging.info(f"\tVirus: {virus['name']} length: {len(virus['sequence'])}bp")
+            logging.info(f"\t\tVirus {virus['name']} split time: {vStop-vStart}")
+            logging.info(f"\t\tVirus: {virus['name']} length: {len(virus['sequence'])}bp")
+
 
         with open("data/output_data/virusesInBiosample.json", "w") as file:
             json.dump(virusesInBiosample, file)

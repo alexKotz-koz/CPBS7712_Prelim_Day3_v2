@@ -1,6 +1,6 @@
 import pandas as pd
 from collections import defaultdict
-
+from components import utils
 
 class ReadsToKmers:
     def __init__(self, readsData, k):
@@ -15,7 +15,10 @@ class ReadsToKmers:
         for read in readsData.itertuples():
             id = read.id
             sequence = read.sequence
-            kmers = [sequence[i : i + k] for i in range(len(sequence) - k + 1)]
+            kmers = utils.toKmers(k,sequence)
+
+            #old repeated version
+            #kmers = [sequence[i : i + k] for i in range(len(sequence) - k + 1)]
 
             for index, kmer in enumerate(kmers):
                 kmerPool[kmer][id].append({index: index + k})

@@ -72,7 +72,6 @@ def main():
     viruses = {}
     virusDataDir = "./data/virus_data"
     RmYN02PrimersDataDir = "./data/virus_data/RmYN02Primers"
-    
 
     # Glacial
     virusFile = "sequences_20240607_3345067.fasta"
@@ -93,6 +92,7 @@ def main():
     # Bat
     sarsCoV2File = "SarsCoV2.fasta"
     mersCoVFile = "MERS-CoV.fasta"
+    ratg13File = "RaTG13.fasta"
     RmYN02FPrimer1 = "RmYN02FPrimer1.fasta"
     RmYN02RPrimer1 = "RmYN02RPrimer1.fasta"
     RmYN02FPrimer2 = "RmYN02FPrimer2.fasta"
@@ -110,8 +110,6 @@ def main():
     RmYN02FPrimer8 = "RmYN02FPrimer8.fasta"
     RmYN02RPrimer8 = "RmYN02RPrimer8.fasta"
     RmYN02Probe = "RmYN02Probe.fasta"
-
-    
 
     # list of file locations
     NCLDVFileLocation = [os.path.join(virusDataDir, NCLDVFile)]
@@ -134,8 +132,9 @@ def main():
         os.path.join(virusDataDir, NCLDVFile),
     ]
     batVirusFileLocations = [
-        os.path.join(virusDataDir, sarsCoV2File),
-        os.path.join(virusDataDir, mersCoVFile),
+        # os.path.join(virusDataDir, sarsCoV2File),
+        # os.path.join(virusDataDir, mersCoVFile),
+        # os.path.join(virusDataDir, ratg13File),
         os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer1),
         os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer1),
         os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer2),
@@ -152,7 +151,7 @@ def main():
         os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer7),
         os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer8),
         os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer8),
-        os.path.join(RmYN02PrimersDataDir, RmYN02Probe)
+        os.path.join(RmYN02PrimersDataDir, RmYN02Probe),
     ]
     syntheticVirusFileLocation = [
         os.path.join(os.path.join(dataDir, "synthetic_data"), "synthetic_virus.fasta")
@@ -230,6 +229,7 @@ def main():
     print(f"Time Stamp: Create Contigs finished in {ccTotal}")
 
     # Modify the class instance call for testing the smith-waterman implementations
+    ## TODO: replace contigs input arg with contig kmer pool
     sfvStart = time.time()
     searchForVirusesInstance = SearchString(
         viruses, "data/logs/r-kmerPool.json", contigs, k
@@ -252,3 +252,4 @@ if __name__ == "__main__":
     main()
     stop = time.time()
     logging.info(f"Project execution time: {stop-start}")
+    logging.info("____________________________________________________________________")

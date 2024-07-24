@@ -128,7 +128,7 @@ class CreateContigs:
                 json.dump(edgesCount, file)
         except FileNotFoundError:
             print("File or directory not found")
-        logging.info(f"Create Contigs: ")
+        logging.info(f"\nCreate Contigs: ")
         logging.info(f"\tNumber of start nodes: {incoming}")
         logging.info(f"\tNumber of end nodes: {outgoing}")
 

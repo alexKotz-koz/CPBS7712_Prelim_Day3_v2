@@ -56,6 +56,6 @@ class ImportVirus:
             sorted(virusDataDict.items(), key=lambda item: len(item[1]["sequence"]))
         )
 
-        logging.info(f"Import Viruses: ")
+        logging.info(f"\nImport Viruses: ")
         logging.info(f"\tThere are {len(virusDataDict)} viruses in this dataset")
         return virusDataDict

@@ -1,8 +1,8 @@
 import os
 import pandas as pd
-import seaborn as sns
+import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
+from matplotlib.backends.backend_pdf import PdfPages
 import json
 import math
 import warnings
@@ -13,7 +13,14 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 # number of contigs per virus with thier distance
 class ViromeReport:
-    def __init__(self, contigs, virusesInBiosample, biosampleFile, qcMetadata, virusDataFileLocations):
+    def __init__(
+        self,
+        contigs,
+        virusesInBiosample,
+        biosampleFile,
+        qcMetadata,
+        virusDataFileLocations,
+    ):
         self.contigs = contigs
         self.virusesInBiosample = virusesInBiosample
         self.biosampleFile = biosampleFile
@@ -26,6 +33,8 @@ class ViromeReport:
         self.taxDir = os.path.join(dataDir, "taxonomy")
         os.makedirs(self.reportDir, exist_ok=True)
 
+    # Input: viruses, biosample contigs
+    # Output: virusAbundance dictionary, contains the estimated abundance of the viral sequence in the biosample sequence
     def virusAbundance(self):
         virusAbundance = {}
         contigs = self.contigs
@@ -38,84 +47,105 @@ class ViromeReport:
             virusAbundance[vName] = {"abundance": vProportion * 100}
         return virusAbundance
 
-    def shannonDiversity(self, virusAbundance):
-        # Shannon index diversity formula: https://www.statology.org/shannon-diversity-index/
-        pITimeslnPis = []
-        for index, virus in virusAbundance.items():
-            if virus["abundance"] == 0:
-                continue
-            pI = virus["abundance"] / 100
-            lnPi = math.log(pI)
-            pITimeslnPi = pI * lnPi
-            pITimeslnPis.append(pITimeslnPi)
-        shannonDiversityIndex = sum(pITimeslnPis) * -1
-        return shannonDiversityIndex
+    def createPDF(self, biosampleDf, biosampleName, virusDf, ouputFileName):
+        with PdfPages(ouputFileName) as pdf:
+            fig, ax = plt.subplots(figsize=(12, 4))
+            ax.axis("tight")
+            ax.axis("off")
+            plt.title(f"Biosample Information: {biosampleName}", fontsize=14, pad=20)
+
+            # Create table for biosample information
+            biosample_table = ax.table(
+                cellText=biosampleDf.values, colLabels=biosampleDf.columns, loc="center"
+            )
+            biosample_table.auto_set_font_size(False)
+            biosample_table.set_fontsize(10)
+            biosample_table.scale(1.2, 1.2)
+            pdf.savefig(fig, bbox_inches="tight")
+
+            # Create table for virus taxonomy information
+            fig, ax = plt.subplots(figsize=(25, 6))  # Increase figure size
+            ax.axis("tight")
+            ax.axis("off")
+            plt.title(
+                "Virus Taxonomic Classification and Abundance", fontsize=14, pad=20
+            )
+
+            # Create table for virus data
+            virus_table = ax.table(
+                cellText=virusDf.values,
+                colLabels=virusDf.columns,
+                loc="center",
+            )
+            virus_table.auto_set_font_size(False)
+            virus_table.set_fontsize(8)  # Reduce font size
+            virus_table.scale(1.0, 1.0)  # Reduce scaling
+            pdf.savefig(fig, bbox_inches="tight")
 
     def generateReport(self):
         reportFile = "virome_report.txt"
+        biosampleFileName = self.biosampleFile.strip(".fastq")
+        virusDf = ""
 
-        virusAbundance = self.virusAbundance()
-        df = pd.DataFrame(virusAbundance).T.reset_index()
-        df.columns = ["Virus", "Abundance"]
+        virusAbundanceDf = pd.DataFrame(self.virusAbundance()).T.reset_index()
+        virusAbundanceDf.columns = ["Virus", "Abundance"]
 
-        sns.barplot(
-            x="Virus",
-            y="Abundance",
-            data=df,
-        )
-        plt.xticks(rotation=45, fontsize="x-small")
-        plt.title(f"Virus Abundance in {self.biosampleFile}")
-        figFile = os.path.join(self.reportDir, "VirusAbundance.png")
-        plt.savefig(figFile, bbox_inches="tight")
-
-        # shannon diversity index
-        shannonIndex = self.shannonDiversity(virusAbundance)
-
-        # qc metadata
+        # QC metadata
         lengthOriginalBiosample = self.qcMetadata["lengthOriginalBiosample"]
         lengthCleanedBiosample = self.qcMetadata["lengthCleanedBiosample"]
         avgReadLength = self.qcMetadata["averageReadLength"]
         minReadLen = self.qcMetadata["minimumReadLength"]
         maxReadLen = self.qcMetadata["maximumReadLength"]
 
-        #taxa table
-        taxFile = os.path.join(self.taxDir, 'CoV-Taxonomy.json')
-        sarsCov2TaxaDf = pd.read_json(taxFile)
-        print(sarsCov2TaxaDf.head())
-        # Set 'virusName' as the index
-        sarsCov2TaxaDf.set_index('virusName', inplace=True)
-        sarsCov2TaxaDf['abundance'] = sarsCov2TaxaDf.index.to_series().apply(
-            lambda x: virusAbundance['Severe acute respiratory syndrome coronavirus 2']['abundance'] if 'SARS-CoV-2' in x 
-            else (virusAbundance['Middle East respiratory syndrome-related coronavirus']['abundance'] if 'MERS-CoV' in x else '0')
+        # Tax table
+        if "bat" in self.biosampleFile:
+            taxFile = os.path.join(self.taxDir, "CoV-Taxonomy.json")
+            batVirusDf = pd.read_json(taxFile)
+            batVirusDf.set_index("virusName", inplace=True)
+            batVirusDf["Relative Viral Abundance"] = np.nan
+
+            for virus, abundance in self.virusAbundance().items():
+                batVirusDf.loc[virus, "Relative Viral Abundance"] = abundance[
+                    "abundance"
+                ]
+
+            batVirusDf.rename(columns={"virusName": "Virus Name"}, inplace=True)
+            batVirusDf.to_csv(
+                os.path.join(self.reportDir, f"{biosampleFileName}_tax.csv"),
+                index_label="Virus Name",
+            )
+            virusDf = batVirusDf
+
+        biosampleInfo = {
+            "Metric": [
+                "Number of Reads in Original Biosample File",
+                "Number of Reads in Cleaned Biosample File",
+                "Average Read Length after Quality Control (bp)",
+                "Minimum Read Length after Quality Control (bp)",
+                "Maximum Read Length after Quality Control (bp)",
+            ],
+            "Value": [
+                lengthOriginalBiosample,
+                lengthCleanedBiosample,
+                avgReadLength,
+                minReadLen,
+                maxReadLen,
+            ],
+        }
+        biosampleDf = pd.DataFrame(biosampleInfo)
+        self.createPDF(
+            biosampleDf,
+            biosampleFileName,
+            virusDf,
+            os.path.join(self.reportDir, f"{biosampleFileName}.pdf"),
         )
 
-
-        sarsCov2TaxaDf.to_csv(os.path.join(self.reportDir, f"{self.biosampleFile}_tax.csv"))
-
-
-        # create report file
+        # Create report file
         reportFileLocation = os.path.join(self.reportDir, reportFile)
         with open(reportFileLocation, "a") as file:
             file.write("\n\nVirome Report:\n\n")
             file.write("Biosample Information:\n")
-            file.write(
-                f"\tNumber of Reads in Original Biosample File: {lengthOriginalBiosample}\n"
-            )
-            file.write(
-                f"\tNumber of Reads in Biosample after Quality Control: {lengthCleanedBiosample}\n\n"
-            )
-            file.write(
-                f"\tAverage Read Length after Quality Control: {avgReadLength} bp\n"
-            )
-            file.write(
-                f"\tMinimum Read Length after Quality Control: {minReadLen} bp\n"
-            )
-            file.write(
-                f"\tMaximum Read Length after Quality Control: {maxReadLen} bp\n\n"
-            )
-            file.write(
-                f"Shannon Diversity Index for {self.biosampleFile} community: {round(shannonIndex, 3)}\n\n"
-            )
-
-            file.write(f"Virus Abundance in {self.biosampleFile}:\n")
-            json.dump(virusAbundance, file, indent=4)
+            for metric, value in zip(biosampleInfo["Metric"], biosampleInfo["Value"]):
+                file.write(f"\t{metric}: {value}\n")
+            file.write("\nVirus Abundance in the biosample:\n")
+            json.dump(self.virusAbundance(), file, indent=4)
