@@ -1,0 +1,27 @@
+[{
+    "virusName": "SARS-CoV-2",
+    "Realm": "Riboviria",
+    "Kingdom": "Orthornavirae",
+    "Phylum": "Pisuviricota",
+    "Class": "Pisoniviricetes",
+    "Order": "Nidovirales",
+    "Suborder": "Cornidovirineae",
+    "Family": "Coronaviridae",
+    "Subfamily": "Orthocoronavirinae",
+    "Genus": "Betacoronavirus",
+    "Subgenus": "Sarbecovirus",
+    "Species": "Severe acute respiratory syndrome-related coronavirus"
+},
+{
+    "virusName": "MERS-CoV",
+    "Realm": "Riboviria",
+    "Kingdom": "Orthornavirae",
+    "Phylum": "Pisuviricota",
+    "Class": "Pisoniviricetes",
+    "Order": "Nidovirales",
+    "Suborder": "Cornidovirineae",
+    "Family": "Coronaviridae",
+    "Subfamily": "Orthocoronavirinae",
+    "Genus": "Betacoronavirus",
+    "Subgenus": "Merbecovirus"
+  }]

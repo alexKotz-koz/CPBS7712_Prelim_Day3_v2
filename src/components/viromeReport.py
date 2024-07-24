@@ -13,12 +13,17 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 # number of contigs per virus with thier distance
 class ViromeReport:
-    def __init__(self, contigs, virusesInBiosample, biosampleFile, qcMetadata):
+    def __init__(self, contigs, virusesInBiosample, biosampleFile, qcMetadata, virusDataFileLocations):
         self.contigs = contigs
         self.virusesInBiosample = virusesInBiosample
         self.biosampleFile = biosampleFile
         self.qcMetadata = qcMetadata
+        self.virusDataFileLocations = virusDataFileLocations
         self.reportDir = "data/reports"
+        scriptDir = os.path.dirname(os.path.dirname(__file__))
+        dataDir = "data"
+        dataDir = os.path.join(scriptDir, "data")
+        self.taxDir = os.path.join(dataDir, "taxonomy")
         os.makedirs(self.reportDir, exist_ok=True)
 
     def virusAbundance(self):
@@ -73,10 +78,25 @@ class ViromeReport:
         minReadLen = self.qcMetadata["minimumReadLength"]
         maxReadLen = self.qcMetadata["maximumReadLength"]
 
+        #taxa table
+        taxFile = os.path.join(self.taxDir, 'CoV-Taxonomy.json')
+        sarsCov2TaxaDf = pd.read_json(taxFile)
+        print(sarsCov2TaxaDf.head())
+        # Set 'virusName' as the index
+        sarsCov2TaxaDf.set_index('virusName', inplace=True)
+        sarsCov2TaxaDf['abundance'] = sarsCov2TaxaDf.index.to_series().apply(
+            lambda x: virusAbundance['Severe acute respiratory syndrome coronavirus 2']['abundance'] if 'SARS-CoV-2' in x 
+            else (virusAbundance['Middle East respiratory syndrome-related coronavirus']['abundance'] if 'MERS-CoV' in x else '0')
+        )
+
+
+        sarsCov2TaxaDf.to_csv(os.path.join(self.reportDir, f"{self.biosampleFile}_tax.csv"))
+
+
         # create report file
         reportFileLocation = os.path.join(self.reportDir, reportFile)
-        with open(reportFileLocation, "w") as file:
-            file.write("Virome Report:\n\n")
+        with open(reportFileLocation, "a") as file:
+            file.write("\n\nVirome Report:\n\n")
             file.write("Biosample Information:\n")
             file.write(
                 f"\tNumber of Reads in Original Biosample File: {lengthOriginalBiosample}\n"

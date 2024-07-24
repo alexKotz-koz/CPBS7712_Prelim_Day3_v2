@@ -35,6 +35,13 @@ do
     do
         start_line=$(((j-1)*step_size+1))
         end_line=$((start_line+window_size-1))
+
+        # Adjust start_line to the next line that starts with '@'
+        start_line=$(awk -v start="$start_line" '$0 ~ /^@/ && NR >= start {print NR; exit}' "${2}_total_subset_${i}.fastq")
+
+        # Adjust end_line to the line before the next line that starts with '@'
+        end_line=$(awk -v start="$end_line" '$0 ~ /^@/ && NR > start {print NR-1; exit}' "${2}_total_subset_${i}.fastq")
+
         sed -n "${start_line},${end_line}p" "${2}_total_subset_${i}.fastq" > "${2}_total_subset_${i}_sliding_window_subset_${j}.fastq"
     done
 done

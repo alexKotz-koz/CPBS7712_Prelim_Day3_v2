@@ -34,6 +34,7 @@ class QualityControl:
         perrorscores = []
         sequenceLengths = []
         lengthOriginalBiosample = len(biosample)
+
         for id, read in biosample.items():
             id = id
             sequence = read["sequence"]

@@ -1,16 +1,18 @@
+
+
 Virome Report:
 
 Biosample Information:
-	Number of Reads in Original Biosample File: 145
-	Number of Reads in Biosample after Quality Control: 145
+	Number of Reads in Original Biosample File: 150
+	Number of Reads in Biosample after Quality Control: 150
 
-	Average Read Length after Quality Control: 30.420689655172414 bp
-	Minimum Read Length after Quality Control: 29 bp
-	Maximum Read Length after Quality Control: 32 bp
+	Average Read Length after Quality Control: 146.54 bp
+	Minimum Read Length after Quality Control: 103 bp
+	Maximum Read Length after Quality Control: 150 bp
 
-Shannon Diversity Index for bat1_total_subset_2_sliding_window_subset_4.fastq community: 0
+Shannon Diversity Index for bat1_total_subset_10_sliding_window_subset_1.fastq community: 0
 
-Virus Abundance in bat1_total_subset_2_sliding_window_subset_4.fastq:
+Virus Abundance in bat1_total_subset_10_sliding_window_subset_1.fastq:
 {
     "RmYN02 F Primer 3": {
         "abundance": 0.0
@@ -61,6 +63,9 @@ Virus Abundance in bat1_total_subset_2_sliding_window_subset_4.fastq:
         "abundance": 0.0
     },
     "RmYN02 probe": {
+        "abundance": 0.0
+    },
+    "Severe acute respiratory syndrome coronavirus 2": {
         "abundance": 0.0
     }
 }

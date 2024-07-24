@@ -92,6 +92,7 @@ def main():
 
     # Bat
     sarsCoV2File = "SarsCoV2.fasta"
+    mersCoVFile = "MERS-CoV.fasta"
     RmYN02FPrimer1 = "RmYN02FPrimer1.fasta"
     RmYN02RPrimer1 = "RmYN02RPrimer1.fasta"
     RmYN02FPrimer2 = "RmYN02FPrimer2.fasta"
@@ -133,7 +134,8 @@ def main():
         os.path.join(virusDataDir, NCLDVFile),
     ]
     batVirusFileLocations = [
-        #os.path.join(virusDataDir, sarsCoV2File),
+        os.path.join(virusDataDir, sarsCoV2File),
+        os.path.join(virusDataDir, mersCoVFile),
         os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer1),
         os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer1),
         os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer2),
@@ -158,8 +160,10 @@ def main():
 
     if "synthetic" in biosampleFile:
         virusDataFileLocations = syntheticVirusFileLocation
-    else:
+    elif "bat" in biosampleFile:
         virusDataFileLocations = batVirusFileLocations
+    else:
+        virusDataFileLocations = NCLDVGeneFileLocations
 
     if biosampleFile == "synthetic":
         biosampleFile = "synthetic_biosample.fastq"
@@ -237,10 +241,10 @@ def main():
     logging.info(f"Time Stamp: Find Viruses finished in {sfvTotal}")
     print(f"Time Stamp: Find Viruses finished in {sfvTotal}")
 
-    #viromeReportInstance = ViromeReport(
-    #    contigs, virusesInBiosample, biosampleFile, qcMetadata
-    #)
-    #viromeReportInstance.generateReport()
+    viromeReportInstance = ViromeReport(
+        contigs, virusesInBiosample, biosampleFile, qcMetadata, virusDataFileLocations
+    )
+    viromeReportInstance.generateReport()
 
 
 if __name__ == "__main__":
