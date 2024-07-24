@@ -72,6 +72,7 @@ def main():
     viruses = {}
     virusDataDir = "./data/virus_data"
     RmYN02PrimersDataDir = "./data/virus_data/RmYN02Primers"
+    NCLDVDataDir = "./data/virus_data/NCLDVGenes"
 
     # Glacial
     virusFile = "sequences_20240607_3345067.fasta"
@@ -116,14 +117,14 @@ def main():
     NCLDVFileLocation = [os.path.join(virusDataDir, NCLDVFile)]
     ncbi4VirusesFileLocation = [os.path.join(virusDataDir, ncbi4VirusesFile)]
     NCLDVGeneFileLocations = [
-        os.path.join(virusDataDir, PolBGeneFile),
-        os.path.join(virusDataDir, A32GeneFile),
-        os.path.join(virusDataDir, D5GeneFile),
-        os.path.join(virusDataDir, RNAplGeneFile),
-        os.path.join(virusDataDir, RNApsGeneFile),
-        os.path.join(virusDataDir, mRNAcGeneFile),
-        os.path.join(virusDataDir, RNRSFIIGeneFile),
-        os.path.join(virusDataDir, VLTF3GeneFile),
+        os.path.join(NCLDVDataDir, PolBGeneFile),
+        os.path.join(NCLDVDataDir, A32GeneFile),
+        os.path.join(NCLDVDataDir, D5GeneFile),
+        os.path.join(NCLDVDataDir, RNAplGeneFile),
+        os.path.join(NCLDVDataDir, RNApsGeneFile),
+        os.path.join(NCLDVDataDir, mRNAcGeneFile),
+        os.path.join(NCLDVDataDir, RNRSFIIGeneFile),
+        os.path.join(NCLDVDataDir, VLTF3GeneFile),
     ]
     allGlacialVirusDataFileLocations = [
         os.path.join(virusDataDir, virusFile),

@@ -23,9 +23,11 @@ class ImportBioSample:
 
         # check for different metagenomic sample file paths
         if "biofilm" in biosampleFile:
-            biosampleDataDir = os.path.join(biosample_dataDir, "biofilm")
+            biosampleDataDir = os.path.join(biosample_dataDir, "biofilm/small_subsets")
         elif "cryoconite" in biosampleFile:
-            biosampleDataDir = os.path.join(biosample_dataDir, "cryoconite")
+            biosampleDataDir = os.path.join(
+                biosample_dataDir, "cryoconite/small_subsets"
+            )
         elif "bat" in biosampleFile:
             biosampleDataDir = os.path.join(biosample_dataDir, "bat/small_subsets")
         elif "synthetic" in biosampleFile:

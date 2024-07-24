@@ -6,7 +6,7 @@ cd data
 cd "$original_dir"
 
 # Directory where the subset files are located
-dir="data/biosample_data/bat/small_subsets"
+dir="data/biosample_data/biofilm/small_subsets"
 
 echo $dir
 
@@ -14,7 +14,7 @@ echo $dir
 is_running() {
     ps -p $1 > /dev/null 2>&1
 }
-start_time=$(date +%s)
+
 
 # Iterate over each subset file in the directory
 for filepath in "$dir"/*_sliding_window_subset_*.fastq
@@ -24,6 +24,7 @@ do
     echo ""
     echo $file
     echo ""
+    start_time=$(date +%s)
     # Run main.py in the background
     python3 main.py -k 35 -biosample "$file" &
     # Get the PID of the background process

@@ -88,8 +88,28 @@ class ViromeReport:
             # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
             batVirusDf = batVirusDf[batVirusDf["Relative Viral Abundance"].notna()]
 
-            batVirusDf.rename(columns={"virusName": "Virus Name"}, inplace=True)
+            batVirusDf.rename(index={"virusName": "Virus Name"}, inplace=True)
             batVirusDf.to_csv(
+                os.path.join(self.reportDir, f"{biosampleFileName}_tax.csv"),
+                index_label="Virus Name",
+            )
+        elif "biofilm" in self.biosampleFile or "cryoconite" in self.biosampleFile:
+            taxFile = os.path.join(self.taxDir, "NCLDVGenes-Taxonomy.json")
+            NCLDVGeneDf = pd.read_json(taxFile)
+            NCLDVGeneDf.set_index("virusName", inplace=True)
+            NCLDVGeneDf["Relative Viral Abundance"] = np.nan
+
+            for virus, abundance in self.virusAbundance().items():
+                if virus in NCLDVGeneDf.index:
+                    NCLDVGeneDf.loc[virus, "Relative Viral Abundance"] = abundance[
+                        "abundance"
+                    ]
+
+            # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
+            NCLDVGeneDf = NCLDVGeneDf[NCLDVGeneDf["Relative Viral Abundance"].notna()]
+
+            NCLDVGeneDf.rename(index={"virusName": "Virus Name"}, inplace=True)
+            NCLDVGeneDf.to_csv(
                 os.path.join(self.reportDir, f"{biosampleFileName}_tax.csv"),
                 index_label="Virus Name",
             )
