@@ -1,10 +1,11 @@
 import unittest
 import pandas as pd
 import sys
+import os
 
 # os management for importing readsToKmers
-sys.path.insert(0, "../src/components")
-from readsToKmers import ReadsToKmers
+sys.path.insert(0, "../src")
+from components.readsToKmers import ReadsToKmers
 
 
 class TestReadsToKmers(unittest.TestCase):

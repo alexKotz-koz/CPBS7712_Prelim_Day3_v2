@@ -141,7 +141,8 @@ class ViromeReport:
                 index_label="Virus Name",
             )
 
-        # Calculate the coverage of the subset from the origianl biosample
+        # Add the total number of reads from the original biosample file to biosampleInfo.
+        # This is used in the collect_results.sh file to calculate the percentage of reads tested in the expirement
         with open(os.path.join(self.dataDir, "numReads.json"), "r") as file:
             biosampleNumReads = json.load(file)
         ogBat = list(biosampleNumReads.items())[0][1]
@@ -157,9 +158,6 @@ class ViromeReport:
             numOgReads = ogCryoconite
         elif "synthetic" in biosampleFileName:
             numOgReads = ogSynthetic
-
-        numReads = self.getNumReads(self.biosampleFileLocation)
-        # biosampleCoverage = (numReads / numOgReads) * 100
 
         biosampleInfo = {
             "Metric": [

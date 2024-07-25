@@ -13,7 +13,7 @@ class TestImportBioSample(unittest.TestCase):
         self.import_biosample = ImportBioSample(self.file)
 
     def test_importBioSample(self):
-        resultDict = self.import_biosample.importBioSample()
+        resultDict, fileLocation = self.import_biosample.importBioSample()
         fileExtension = os.path.splitext(self.file)[-1]
         self.assertIsInstance(resultDict, dict)
         self.assertTrue(fileExtension == ".fastq")

@@ -77,17 +77,23 @@ Time Stamp: Reads to Kmers finished in 0.22631192207336426
 Time Stamp: DeBruijn Graph finished in 0.1376938819885254
 Time Stamp: Create Contigs finished in 22.05834698677063
 ```
-3. Upon successful completion, a code and virome report will be generated under the /src/data/reports directory.
-    - Code Report: Contains execution time information and assembly statistics
-    - Virome Report: Contians viral abundace information, quality control information, and a shannon diversity index for the metagenomic sample
-    - ViralAbundance.png: Contains the relative abundance of each virus in the metagenomic sample
-    - QualityControl.png: This is a plot that contains information about the q-score's for each read in the sample (mean and median per sample) along with the length per read (after the quality control phase) in base pairs
+3. Results will be located in src/data/reports
 
-Example Viral Abundace plot (generated from the command in step 1):
-![alt text](src/data/reports/VirusAbundance.png)
-
-Example Quality Control plot (generated from the command in step 1):
-![alt text](src/data/reports/QualityControl.png)
+## Virome Report
+To characterize the virome present in a given metagenomic sample, several metrics are calculated:
+1. Taxonomy of each virus tested
+- Located in the csv file under src/data/reports
+2. Relative Abundance of the virus in the metagenomic sample.
+- Located in the csv file under src/data/reports
+3. Number of metagenomic contigs found in the virus.
+- Located in the csv file under src/data/reports
+4. Quality control metrics: Information regarding the quality control of each metagenomic sample.
+- Located in the pdf file under src/data/reports
+5. Number of reads in the original biosample file. This is used in combination with item 6 in this list, to demonstrated the total number of reads used in the experiement.
+- Located in the pdf file under src/data/reports
+6. Experimental Results: Results for each experiment run can be found under experiemental_results. Each 'experiement' is the result of executing run_all_subsets.sh (located under src/) for each of the metagenomic samples used in the development of this pipeline.
+- execution_stats.txt: Contains the total execution time of the expirement and the total percentage of reads used, from the original metagenomic sample.
+- result.csv: Contains the taxonomic information of all viruses tested against the metagenomic sample and the aggregated relative abundance of each virus in all of the subsets of the original metagenomic sample
 
 ## Requirements
 - Python 3.9 or higher. 
