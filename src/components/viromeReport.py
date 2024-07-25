@@ -6,6 +6,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 import json
 import math
 import warnings
+from components import utils
 
 # ignoring deprecated feature in seaborn
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -17,19 +18,27 @@ class ViromeReport:
         contigs,
         virusesInBiosample,
         biosampleFile,
+        biosampleFileLocation,
         qcMetadata,
     ):
         self.contigs = contigs
-        self.virusesInBiosample = virusesInBiosample
+        self.virusesInBiosample = virusesInBiosample  # contains the viruses tested against the biosample (i.e. 4 for bat) ... can access contigsInVirus
         self.biosampleFile = biosampleFile
+        self.biosampleFileLocation = biosampleFileLocation
         self.qcMetadata = qcMetadata
         self.reportDir = "data/reports"
         scriptDir = os.path.dirname(os.path.dirname(__file__))
         dataDir = "data"
-        dataDir = os.path.join(scriptDir, "data")
+        self.dataDir = os.path.join(scriptDir, "data")
         self.taxDir = os.path.join(dataDir, "taxonomy")
         os.makedirs(self.reportDir, exist_ok=True)
-        # print(f"Viruses in Biosample: {self.virusesInBiosample["contigsInVirus"]}")
+
+    def getNumReads(self, fileLocation):
+        with open(fileLocation, "r") as file:
+            lines = file.readlines()
+            reads = [line for line in lines if line[0] == "@"]
+            numReads = len(reads)
+            return numReads
 
     # Input: viruses, biosample contigs
     # Output: virusAbundance dictionary,(# of contigs that match parts of virus)/total # of contigs
@@ -41,8 +50,12 @@ class ViromeReport:
         for virus in virusesInBiosample:
             vName = virus["virus"]
             numContigs = virus["numContigsInVirus"]
+
             vProportion = numContigs / totalNumContigs
-            virusAbundance[vName] = {"abundance": vProportion * 100}
+            virusAbundance[vName] = {
+                "abundance": vProportion * 100,
+                "numContigsInVirus": numContigs,
+            }
         return virusAbundance
 
     def createPDF(self, biosampleDf, biosampleName, ouputFileName):
@@ -61,19 +74,22 @@ class ViromeReport:
             biosample_table.scale(1.2, 1.2)
             pdf.savefig(fig, bbox_inches="tight")
 
-    def addAbundaceToDf(self, virusDf):
+    def addColumnsToDf(self, virusDf):
         virusDf.set_index("virusName", inplace=True)
         virusDf["Relative Viral Abundance"] = np.nan
-
+        virusDf["# Biosample Contigs in Virus"] = np.nan
         # virusAubndance "{name, %contigs in virus}"
         for virus, abundance in self.virusAbundance().items():
             if virus in virusDf.index:
+                virusDf.loc[virus, "# Biosample Contigs in Virus"] = abundance[
+                    "numContigsInVirus"
+                ]
                 virusDf.loc[virus, "Relative Viral Abundance"] = abundance["abundance"]
 
     def generateReport(self):
         reportFile = "virome_report.txt"
-        biosampleFileName = self.biosampleFile.strip(".fastq")
-
+        biosampleFileName = self.biosampleFile.replace(".fastq", "")
+        print(biosampleFileName)
         # QC metadata
         lengthOriginalBiosample = self.qcMetadata["lengthOriginalBiosample"]
         lengthCleanedBiosample = self.qcMetadata["lengthCleanedBiosample"]
@@ -86,7 +102,7 @@ class ViromeReport:
             taxFile = os.path.join(self.taxDir, "CoV-Taxonomy.json")
             batVirusDf = pd.read_json(taxFile)
 
-            self.addAbundaceToDf(virusDf=batVirusDf)
+            self.addColumnsToDf(virusDf=batVirusDf)
 
             # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
             batVirusDf = batVirusDf[batVirusDf["Relative Viral Abundance"].notna()]
@@ -100,7 +116,7 @@ class ViromeReport:
             taxFile = os.path.join(self.taxDir, "NCLDVGenes-Taxonomy.json")
             NCLDVGeneDf = pd.read_json(taxFile)
 
-            self.addAbundaceToDf(virusDf=NCLDVGeneDf)
+            self.addColumnsToDf(virusDf=NCLDVGeneDf)
 
             # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
             NCLDVGeneDf = NCLDVGeneDf[NCLDVGeneDf["Relative Viral Abundance"].notna()]
@@ -114,7 +130,7 @@ class ViromeReport:
             taxFile = os.path.join(self.taxDir, "synthetic-Taxonomy.json")
             synthDf = pd.read_json(taxFile)
 
-            self.addAbundaceToDf(virusDf=synthDf)
+            self.addColumnsToDf(virusDf=synthDf)
 
             # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
             synthDf = synthDf[synthDf["Relative Viral Abundance"].notna()]
@@ -124,13 +140,35 @@ class ViromeReport:
                 os.path.join(self.reportDir, f"{biosampleFileName}_tax.csv"),
                 index_label="Virus Name",
             )
+
+        # Calculate the coverage of the subset from the origianl biosample
+        with open(os.path.join(self.dataDir, "numReads.json"), "r") as file:
+            biosampleNumReads = json.load(file)
+        ogBat = list(biosampleNumReads.items())[0][1]
+        ogBiofilm = list(biosampleNumReads.items())[1][1]
+        ogCryoconite = list(biosampleNumReads.items())[2][1]
+        ogSynthetic = list(biosampleNumReads.items())[3][1]
+
+        if "bat" in biosampleFileName:
+            numOgReads = ogBat
+        elif "biofilm" in biosampleFileName:
+            numOgReads = ogBiofilm
+        elif "cryoconite" in biosampleFileName:
+            numOgReads = ogCryoconite
+        elif "synthetic" in biosampleFileName:
+            numOgReads = ogSynthetic
+
+        numReads = self.getNumReads(self.biosampleFileLocation)
+        # biosampleCoverage = (numReads / numOgReads) * 100
+
         biosampleInfo = {
             "Metric": [
-                "Number of Reads in Original Biosample File",
+                "Number of Reads in Biosample File",
                 "Number of Reads in Cleaned Biosample File",
                 "Average Read Length after Quality Control (bp)",
                 "Minimum Read Length after Quality Control (bp)",
                 "Maximum Read Length after Quality Control (bp)",
+                "Number of Reads in Original Biosample File",
             ],
             "Value": [
                 lengthOriginalBiosample,
@@ -138,9 +176,12 @@ class ViromeReport:
                 avgReadLength,
                 minReadLen,
                 maxReadLen,
+                numOgReads,
             ],
         }
+
         biosampleDf = pd.DataFrame(biosampleInfo)
+
         self.createPDF(
             biosampleDf,
             biosampleFileName,

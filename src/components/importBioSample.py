@@ -55,4 +55,4 @@ class ImportBioSample:
 
         biosampleList = [{"id": id, **data} for id, data in biosample.items()]
 
-        return biosample
+        return biosample, biosampleFileLocation

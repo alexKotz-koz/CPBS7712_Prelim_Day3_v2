@@ -6,7 +6,7 @@ cd data
 cd "$original_dir"
 
 # Directory where the subset files are located
-dir="data/biosample_data/cryoconite/small_subsets"
+dir="data/biosample_data/bat/small_subsets"
 
 echo $dir
 
@@ -73,5 +73,8 @@ do
     cd "$original_dir"
 done
 
+cd ..
+cd experimental_results
+./collect_results.sh
 
 

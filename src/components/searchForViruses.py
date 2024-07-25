@@ -118,7 +118,7 @@ class SearchString:
         }
         breakKmersEnd = time.time()
         logging.info(
-            f"\tVirus To Kmers: {breakKmersEnd-breakKmersStart}.\n\t\t*Note: This creates kmer pools for all viruses before creating the contigs for each individual virus."
+            f"\n\tVirus To Kmers: {breakKmersEnd-breakKmersStart}.\n\t\t*Note: This creates kmer pools for all viruses before creating the contigs for each individual virus."
         )
 
         for virusId, virus in self.viruses.items():
@@ -132,8 +132,9 @@ class SearchString:
             # 7/23/24 21:16 | removed virus["name"] from self.createContigsInfo call
             # original: contigsInfo = self.createContigsInfo(virus["name"], virusKmerPool)
             contigsInfo = self.createContigsInfo(virusKmerPool)
+
             createContigsEnd = time.time()
-            logging.info(f"\tCreate Contigs: {createContigsEnd-createContigsStart}")
+            logging.info(f"\n\tCreate Contigs: {createContigsEnd-createContigsStart}")
 
             for contig in contigsInfo:
                 if contig["kmerCount"] > 0:
@@ -158,6 +159,10 @@ class SearchString:
             logging.info(
                 f"\t\tVirus: {virus['name']} length: {len(virus['sequence'])}bp"
             )
+            if len(contigsExistInVirus) > 0:
+                with open(f"data/logs/{virus['name']}contigsInVirus.json", "w") as file:
+                    contigsExistInVirus[0] = virus["name"]
+                    json.dump(contigsExistInVirus, file)
 
         with open("data/output_data/virusesInBiosample.json", "w") as file:
             json.dump(virusesInBiosample, file)

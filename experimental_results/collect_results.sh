@@ -18,6 +18,9 @@ header_handled=false
 # Variable to store total execution time
 total_execution_time=0
 
+# Variable to store the number of reads in the original biosample file
+original_biosample_reads=0
+
 # Iterate through each subdirectory
 for subdir in "$DIR"/*; do
     if [ -d "$subdir" ]; then
@@ -39,6 +42,10 @@ for subdir in "$DIR"/*; do
             execution_time=$(awk '/Total execution time of the script:/ {print $7}' app.log)
             total_execution_time=$((total_execution_time + execution_time))
         fi
+        # Extract the number of reads in the original biosample file from the virome_report.txt file
+        if [ -f virome_report.txt ] && [ $original_biosample_reads -eq 0 ]; then
+            original_biosample_reads=$(awk -F': ' '/Number of Reads in Original Biosample File/ {print $2}' virome_report.txt)
+        fi
     fi
 done
 
@@ -47,6 +54,10 @@ awk -F, '{a[$1] += $15; lines[$1]=$0} END{for (i in a) {split(lines[i],fields,",
 
 # Write the total execution time to the execution_stats.txt file
 echo "Total execution time: $total_execution_time seconds" > "$execution_stats_file"
+
+# Calculate the percentage of reads used and write it to the execution_stats.txt file
+percentage_of_reads_used=$(echo "scale=10; (40/$original_biosample_reads)*100" | bc)
+echo "Percentage of reads used: $percentage_of_reads_used%" >> "$execution_stats_file"
 
 # Remove the temporary file
 rm "$temp_file"

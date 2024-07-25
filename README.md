@@ -94,3 +94,9 @@ Example Quality Control plot (generated from the command in step 1):
     - This project was developed in python v3.11 and has been tested with python 3.9 thru 3.12.
 - Miniconda (see Installation section for further instructions).
 - macOS or Linux based operating system.
+
+## Notes:
+- Number of total reads in the original biosample files were calculated by:
+```sh
+grep -o '@' filname | wc -l
+```
