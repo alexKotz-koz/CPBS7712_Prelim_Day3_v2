@@ -1,0 +1,44 @@
+[
+    {
+        "virusName": "ABC virus",
+        "Realm": "A",
+        "Kingdom": "B",
+        "Phylum": "C",
+        "Class": "D",
+        "Order": "E",
+        "Suborder": "F",
+        "Family": "G",
+        "Subfamily": "H",
+        "Genus": "I",
+        "Subgenus": "J",
+        "Species": "K"
+    },
+    {
+        "virusName": "DEF virus",
+        "Realm": "A",
+        "Kingdom": "B",
+        "Phylum": "C",
+        "Class": "D",
+        "Order": "E",
+        "Suborder": "F",
+        "Family": "G",
+        "Subfamily": "H",
+        "Genus": "I",
+        "Subgenus": "J",
+        "Species": "K"
+    },
+    {
+        "virusName": "GHI virus",
+        "Realm": "A",
+        "Kingdom": "B",
+        "Phylum": "C",
+        "Class": "D",
+        "Order": "E",
+        "Suborder": "F",
+        "Family": "G",
+        "Subfamily": "H",
+        "Genus": "I",
+        "Subgenus": "J",
+        "Species": "K"
+    }
+]

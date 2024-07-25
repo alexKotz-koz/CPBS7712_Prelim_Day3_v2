@@ -11,7 +11,6 @@ import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 
-# number of contigs per virus with thier distance
 class ViromeReport:
     def __init__(
         self,
@@ -30,15 +29,16 @@ class ViromeReport:
         dataDir = os.path.join(scriptDir, "data")
         self.taxDir = os.path.join(dataDir, "taxonomy")
         os.makedirs(self.reportDir, exist_ok=True)
+        # print(f"Viruses in Biosample: {self.virusesInBiosample["contigsInVirus"]}")
 
     # Input: viruses, biosample contigs
-    # Output: virusAbundance dictionary, contains the estimated abundance of the viral sequence in the biosample sequence
+    # Output: virusAbundance dictionary,(# of contigs that match parts of virus)/total # of contigs
     def virusAbundance(self):
         virusAbundance = {}
         contigs = self.contigs
         totalNumContigs = len(contigs)
-        vInB = self.virusesInBiosample
-        for virus in vInB:
+        virusesInBiosample = self.virusesInBiosample
+        for virus in virusesInBiosample:
             vName = virus["virus"]
             numContigs = virus["numContigsInVirus"]
             vProportion = numContigs / totalNumContigs
@@ -61,6 +61,15 @@ class ViromeReport:
             biosample_table.scale(1.2, 1.2)
             pdf.savefig(fig, bbox_inches="tight")
 
+    def addAbundaceToDf(self, virusDf):
+        virusDf.set_index("virusName", inplace=True)
+        virusDf["Relative Viral Abundance"] = np.nan
+
+        # virusAubndance "{name, %contigs in virus}"
+        for virus, abundance in self.virusAbundance().items():
+            if virus in virusDf.index:
+                virusDf.loc[virus, "Relative Viral Abundance"] = abundance["abundance"]
+
     def generateReport(self):
         reportFile = "virome_report.txt"
         biosampleFileName = self.biosampleFile.strip(".fastq")
@@ -76,14 +85,8 @@ class ViromeReport:
         if "bat" in self.biosampleFile:
             taxFile = os.path.join(self.taxDir, "CoV-Taxonomy.json")
             batVirusDf = pd.read_json(taxFile)
-            batVirusDf.set_index("virusName", inplace=True)
-            batVirusDf["Relative Viral Abundance"] = np.nan
 
-            for virus, abundance in self.virusAbundance().items():
-                if virus in batVirusDf.index:
-                    batVirusDf.loc[virus, "Relative Viral Abundance"] = abundance[
-                        "abundance"
-                    ]
+            self.addAbundaceToDf(virusDf=batVirusDf)
 
             # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
             batVirusDf = batVirusDf[batVirusDf["Relative Viral Abundance"].notna()]
@@ -96,14 +99,8 @@ class ViromeReport:
         elif "biofilm" in self.biosampleFile or "cryoconite" in self.biosampleFile:
             taxFile = os.path.join(self.taxDir, "NCLDVGenes-Taxonomy.json")
             NCLDVGeneDf = pd.read_json(taxFile)
-            NCLDVGeneDf.set_index("virusName", inplace=True)
-            NCLDVGeneDf["Relative Viral Abundance"] = np.nan
 
-            for virus, abundance in self.virusAbundance().items():
-                if virus in NCLDVGeneDf.index:
-                    NCLDVGeneDf.loc[virus, "Relative Viral Abundance"] = abundance[
-                        "abundance"
-                    ]
+            self.addAbundaceToDf(virusDf=NCLDVGeneDf)
 
             # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
             NCLDVGeneDf = NCLDVGeneDf[NCLDVGeneDf["Relative Viral Abundance"].notna()]
@@ -113,7 +110,20 @@ class ViromeReport:
                 os.path.join(self.reportDir, f"{biosampleFileName}_tax.csv"),
                 index_label="Virus Name",
             )
+        else:
+            taxFile = os.path.join(self.taxDir, "synthetic-Taxonomy.json")
+            synthDf = pd.read_json(taxFile)
 
+            self.addAbundaceToDf(virusDf=synthDf)
+
+            # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
+            synthDf = synthDf[synthDf["Relative Viral Abundance"].notna()]
+
+            synthDf.rename(index={"virusName": "Virus Name"}, inplace=True)
+            synthDf.to_csv(
+                os.path.join(self.reportDir, f"{biosampleFileName}_tax.csv"),
+                index_label="Virus Name",
+            )
         biosampleInfo = {
             "Metric": [
                 "Number of Reads in Original Biosample File",
@@ -140,7 +150,6 @@ class ViromeReport:
         # Create report file
         reportFileLocation = os.path.join(self.reportDir, reportFile)
         with open(reportFileLocation, "a") as file:
-            file.write("\n\nVirome Report:\n\n")
             file.write("Biosample Information:\n")
             for metric, value in zip(biosampleInfo["Metric"], biosampleInfo["Value"]):
                 file.write(f"\t{metric}: {value}\n")
