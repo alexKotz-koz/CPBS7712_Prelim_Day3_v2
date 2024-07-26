@@ -1,9 +1,0 @@
-Main: 
-	BioSample File: biofilm_total_subset_10_sliding_window_subset_1.fastq
-	Size of K = 35
-
-Import Viruses: 
-	There are 8 viruses in this dataset
-______________________________________________________
-Date: 2024-07-26 10:10:19
-Total execution time of the script: 1 seconds.
