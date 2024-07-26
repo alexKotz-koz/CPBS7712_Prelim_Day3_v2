@@ -6,7 +6,7 @@ cd data
 cd "$original_dir"
 
 # Directory where the subset files are located
-dir="data/biosample_data/bat/small_subsets"
+dir="data/biosample_data/biofilm/small_subsets"
 
 echo $dir
 

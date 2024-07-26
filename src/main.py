@@ -17,14 +17,9 @@ from components.qc import QualityControl
 from components.readsToKmers import ReadsToKmers
 from components.deBruijnGraph import DeBruijnGraph
 from components.createContigs import CreateContigs
-
-# Uncomment these lines to test the implementation of the smith-waterman algorithms and adjust the class instance initalization on line 183
-# from components.searchForViruses_SW import SearchForViruses
-# from components.searchForViruses_SW_PP import SearchForViruses
 from components.searchForViruses import SearchString
 
 from components.viromeReport import ViromeReport
-from components.codeReport import CodeReport
 
 logDir = "data/logs"
 os.makedirs(logDir, exist_ok=True)
@@ -134,27 +129,27 @@ def main():
         os.path.join(virusDataDir, NCLDVFile),
     ]
     batVirusFileLocations = [
-        # os.path.join(virusDataDir, sarsCoV2File),
-        # os.path.join(virusDataDir, mersCoVFile),
-        # os.path.join(virusDataDir, ratg13File),
-        # os.path.join(virusDataDir, marburgFile),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer1),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer1),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer2),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer2),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer3),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer3),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer4),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer4),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer5),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer5),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer6),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer6),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer7),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer7),
-        os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer8),
-        os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer8),
-        os.path.join(RmYN02PrimersDataDir, RmYN02Probe),
+        os.path.join(virusDataDir, sarsCoV2File),
+        os.path.join(virusDataDir, mersCoVFile),
+        os.path.join(virusDataDir, ratg13File),
+        os.path.join(virusDataDir, marburgFile),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer1),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer1),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer2),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer2),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer3),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer3),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer4),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer4),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer5),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer5),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer6),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer6),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer7),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer7),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer8),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer8),
+        # os.path.join(RmYN02PrimersDataDir, RmYN02Probe),
     ]
     syntheticVirusFileLocation = [
         os.path.join(os.path.join(dataDir, "synthetic_data"), "synthetic_virus.fasta")
@@ -171,6 +166,8 @@ def main():
         biosampleFile = "synthetic_biosample.fastq"
 
     #### Main ####
+
+    # Import Biosample
     bioStart = time.time()
     importBioSampleInstance = ImportBioSample(biosampleFile=biosampleFile)
     biosample, biosampleFileLocation = importBioSampleInstance.importBioSample()
@@ -178,6 +175,7 @@ def main():
     bioTotal = bioStop - bioStart
     componentRunTimes["importBioSample"] = bioTotal
 
+    # Import Viruses
     virusStart = time.time()
     importVirusInstance = ImportVirus()
     viruses = importVirusInstance.importVirusData(fileLocations=virusDataFileLocations)
@@ -185,6 +183,7 @@ def main():
     virusTotal = virusStop - virusStart
     componentRunTimes["importVirus"] = virusTotal
 
+    # Quality Control
     qcStart = time.time()
     qualityControlInstance = QualityControl(biosample=biosample)
     cleanedBiosample, minimumReadLength, qualityControlReport, qcMetadata = (
@@ -194,6 +193,7 @@ def main():
     qcTotal = qcStop - qcStart
     componentRunTimes["qc"] = qcTotal
 
+    # Reads to K-mers
     if k > (minimumReadLength - 2):
         print(
             f"\nK must be at least one less than the size of the smallest read.\nMinimum read length for this sample is: {minimumReadLength}"
@@ -213,6 +213,7 @@ def main():
     with open("data/logs/r-kmerPool.json", "w") as file:
         json.dump(kmerPool, file)
 
+    # De Bruijn Graph
     dbgStart = time.time()
     debruijnGraphInstance = DeBruijnGraph(kmerPool=kmerPool, k=k)
     nodes, edges = debruijnGraphInstance.constructGraph()
@@ -222,6 +223,7 @@ def main():
     logging.info(f"Time Stamp: DeBruijn Graph finished in {dbgTotal}")
     print(f"Time Stamp: DeBruijn Graph finished in {dbgTotal}")
 
+    # Create Contigs
     ccStart = time.time()
     createContigsInstance = CreateContigs(graph=edges)
     contigs = createContigsInstance.createContigs()
@@ -231,8 +233,7 @@ def main():
     logging.info(f"Time Stamp: Create Contigs finished in {ccTotal}")
     print(f"Time Stamp: Create Contigs finished in {ccTotal}")
 
-    # Modify the class instance call for testing the smith-waterman implementations
-    ## TODO: replace contigs input arg with contig kmer pool
+    # Search for Viruses (Virus Alignment)
     sfvStart = time.time()
     searchForVirusesInstance = SearchString(
         viruses, "data/logs/r-kmerPool.json", contigs, k
