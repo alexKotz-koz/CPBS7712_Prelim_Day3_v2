@@ -28,9 +28,8 @@ class ViromeReport:
         self.qcMetadata = qcMetadata
         self.reportDir = "data/reports"
         scriptDir = os.path.dirname(os.path.dirname(__file__))
-        dataDir = "data"
         self.dataDir = os.path.join(scriptDir, "data")
-        self.taxDir = os.path.join(dataDir, "taxonomy")
+        self.taxDir = os.path.join(self.dataDir, "taxonomy")
         os.makedirs(self.reportDir, exist_ok=True)
 
     # Input: sequence file
@@ -97,7 +96,6 @@ class ViromeReport:
     def generateReport(self):
         reportFile = "virome_report.txt"
         biosampleFileName = self.biosampleFile.replace(".fastq", "")
-        print(biosampleFileName)
         # QC metadata
         lengthOriginalBiosample = self.qcMetadata["lengthOriginalBiosample"]
         lengthCleanedBiosample = self.qcMetadata["lengthCleanedBiosample"]

@@ -20,4 +20,70 @@ Virus Abundance in the biosample:
         "abundance": 100.0,
         "numContigsInVirus": 4
     }
+}Biosample Information:
+	Number of Reads in Biosample File: 4
+	Number of Reads in Cleaned Biosample File: 4
+	Average Read Length after Quality Control (bp): 9.5
+	Minimum Read Length after Quality Control (bp): 7
+	Maximum Read Length after Quality Control (bp): 13
+	Number of Reads in Original Biosample File: 4
+
+Virus Abundance in the biosample:
+{
+    "DEF virus": {
+        "abundance": 75.0,
+        "numContigsInVirus": 3
+    },
+    "GHI virus": {
+        "abundance": 100.0,
+        "numContigsInVirus": 4
+    },
+    "ABC virus": {
+        "abundance": 100.0,
+        "numContigsInVirus": 4
+    }
+}Biosample Information:
+	Number of Reads in Biosample File: 4
+	Number of Reads in Cleaned Biosample File: 4
+	Average Read Length after Quality Control (bp): 9.5
+	Minimum Read Length after Quality Control (bp): 7
+	Maximum Read Length after Quality Control (bp): 13
+	Number of Reads in Original Biosample File: 4
+
+Virus Abundance in the biosample:
+{
+    "DEF virus": {
+        "abundance": 75.0,
+        "numContigsInVirus": 3
+    },
+    "GHI virus": {
+        "abundance": 100.0,
+        "numContigsInVirus": 4
+    },
+    "ABC virus": {
+        "abundance": 100.0,
+        "numContigsInVirus": 4
+    }
+}Biosample Information:
+	Number of Reads in Biosample File: 4
+	Number of Reads in Cleaned Biosample File: 4
+	Average Read Length after Quality Control (bp): 9.5
+	Minimum Read Length after Quality Control (bp): 7
+	Maximum Read Length after Quality Control (bp): 13
+	Number of Reads in Original Biosample File: 4
+
+Virus Abundance in the biosample:
+{
+    "DEF virus": {
+        "abundance": 75.0,
+        "numContigsInVirus": 3
+    },
+    "GHI virus": {
+        "abundance": 100.0,
+        "numContigsInVirus": 4
+    },
+    "ABC virus": {
+        "abundance": 100.0,
+        "numContigsInVirus": 4
+    }
 }
