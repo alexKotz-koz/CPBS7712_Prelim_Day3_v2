@@ -6,7 +6,7 @@ cd data
 cd "$original_dir"
 
 # Directory where the subset files are located
-dir="data/biosample_data/biofilm/small_subsets"
+dir="data/biosample_data/cryoconite/small_subsets"
 
 echo $dir
 
@@ -25,7 +25,7 @@ do
     echo ""
     start_time=$(date +%s)
     # Run main.py in the background
-    python3 main.py -k 35 -biosample "$file" &
+    python3 main.py -k 40 -biosample "$file" &
     # Get the PID of the background process
     pid=$!
     echo "Current PID: $pid"
