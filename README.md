@@ -90,8 +90,8 @@ To characterize the virome present in a given metagenomic sample, several metric
 
 ### Example of the 2 Virome Report Files:
 
-Biosample Information: Found in src/data/reports/synthetic_biosample.pdf
-Taxonomy of Viruses Tested: Found in src/data/reports/synthetic_biosample_tax.csv
+- Biosample Information: Found in src/data/reports/synthetic_biosample.pdf
+- Taxonomy of Viruses Tested: Found in src/data/reports/synthetic_biosample_tax.csv
 
 ## Requirements
 - Python 3.9 or higher. 

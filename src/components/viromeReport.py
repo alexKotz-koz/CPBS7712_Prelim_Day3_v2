@@ -134,6 +134,7 @@ class ViromeReport:
             )
         else:
             taxFile = os.path.join(self.taxDir, "synthetic-Taxonomy.json")
+            print(f"Tax File: {taxFile}")
             synthDf = pd.read_json(taxFile)
 
             self.addColumnsToDf(virusDf=synthDf)
