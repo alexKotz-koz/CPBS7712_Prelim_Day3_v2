@@ -23,7 +23,6 @@ class ImportBioSample:
 
         # check for different metagenomic sample file paths
         if "biofilm" in biosampleFile:
-            print(f"bio: {biosampleFile}")
             biosampleDataDir = os.path.join(biosample_dataDir, "biofilm/small_subsets")
         elif "cryoconite" in biosampleFile:
             biosampleDataDir = os.path.join(
@@ -42,19 +41,9 @@ class ImportBioSample:
             biosampleFileLocation = os.path.join(biosampleDataDir, biosampleFile)
 
         # write sample dict to file
-        if os.path.isfile(biosampleFileLocation):
-            print("File exists")
-        else:
-            print("File does not exist")
         with open(biosampleFileLocation, "r") as biosampleFile:
             while True:
                 idline = biosampleFile.readline().split(" ")
-                print(f"idline: {idline}")
-                if idline == [""]:
-                    print(
-                        "Problem with biosample fastq file, please verify file integrity."
-                    )
-                    break
                 if not idline[0]:
                     break
                 id = idline[0]

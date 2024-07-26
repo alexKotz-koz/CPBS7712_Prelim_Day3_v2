@@ -56,7 +56,7 @@ awk -F, '{a[$1] += $15; lines[$1]=$0} END{for (i in a) {split(lines[i],fields,",
 echo "Total execution time: $total_execution_time seconds" > "$execution_stats_file"
 
 # Calculate the percentage of reads used and write it to the execution_stats.txt file
-percentage_of_reads_used=$(echo "scale=10; (40/$original_biosample_reads)*100" | bc)
+percentage_of_reads_used=$(echo "scale=10; (36/$original_biosample_reads)*100" | bc)
 echo "Percentage of reads used: $percentage_of_reads_used%" >> "$execution_stats_file"
 
 # Remove the temporary file

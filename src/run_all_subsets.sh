@@ -20,7 +20,6 @@ is_running() {
 for filepath in "$dir"/*_sliding_window_subset_*.fastq
 do
     file=$(basename "$filepath")
-    
     echo ""
     echo $file
     echo ""

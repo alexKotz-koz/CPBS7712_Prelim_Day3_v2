@@ -1,7 +1,7 @@
 # CPBS Prelims Day 3
 > Metagenomic Sequence Assembler and Virome Characterizer 
 
-**Goal:** Develop a general method for characterizing the viral communities in a metagenomic sample. The input to your method is a short-read fastq file containing sequences from a metagenomic sample. 
+**Goal:** Develop a general method for characterizing the virome (viral communities) in a metagenomic sample. The input to your method is a short-read fastq file containing sequences from a metagenomic sample. The output to your method should be a report characterizing the virome, which would be useful to researchers, clinicians, and/or public health officials working in pandemic preparedness.
 
 The outline of this project is as follows:
 1. Read in the metagenomic sample (.fastq) and known viruses (.fasta) 
@@ -17,16 +17,7 @@ The outline of this project is as follows:
 5. Create contigs via a Depth-First Search traverse across the de Bruijn Graph
     - createContigs.py
 6. Search the contigs for substrings of the viral sequences
-    - Three implementations exist: 
-
-        a. Standard search string strategy
-        - searchForViruses.py (__functional implementation, integrated in the current state of the pipeline__)
-
-        b. Leverage a Smith-Waterman local alignment algorithm for aligning each contig against each virus 
-        - searchForViruses_SW.py ~Non-functional, large execution time
-
-        c. Improve the Smith-Waterman algorithm by implementing parallel processing (via the concurrent.futures module) 
-        - searchForViruses_SW_PP.py ~ Non-functional, large execution time
+    - searchForViruses.py
 
 **Note on Input files:** Expected file types of input files are .fastq. Each read should contain 4 lines of information:
 
@@ -79,6 +70,8 @@ Time Stamp: Create Contigs finished in 22.05834698677063
 ```
 3. Results will be located in src/data/reports
 
+
+
 ## Virome Report
 To characterize the virome present in a given metagenomic sample, several metrics are calculated:
 1. Taxonomy of each virus tested
@@ -92,7 +85,7 @@ To characterize the virome present in a given metagenomic sample, several metric
 5. Number of reads in the original biosample file. This is used in combination with item 6 in this list, to demonstrated the total number of reads used in the experiement.
 - Located in the pdf file under src/data/reports
 6. Experimental Results: Results for each experiment run can be found under experiemental_results. Each 'experiement' is the result of executing run_all_subsets.sh (located under src/) for each of the metagenomic samples used in the development of this pipeline.
-- execution_stats.txt: Contains the total execution time of the expirement and the total percentage of reads used, from the original metagenomic sample.
+- execution_stats.txt: Contains the total execution time of the experiment and the total percentage of reads used, from the original metagenomic sample.
 - result.csv: Contains the taxonomic information of all viruses tested against the metagenomic sample and the aggregated relative abundance of each virus in all of the subsets of the original metagenomic sample
 
 ## Requirements
@@ -101,8 +94,12 @@ To characterize the virome present in a given metagenomic sample, several metric
 - Miniconda (see Installation section for further instructions).
 - macOS or Linux based operating system.
 
-## Notes:
+## Automation and Supplemental Files:
 - Number of total reads in the original biosample files were calculated by:
 ```sh
 grep -o '@' filname | wc -l
 ```
+- Automation Scripts Include:
+    - **run_all_subsets.sh**: Executes the metagenomic pipeline on all 40 subsets of the metagenomic sample, generating results for each run in the experiemental_results directory at the root of the project.
+    - **subset_biosample.sh**: Creates 40 subsets of the original metagenomic sample via a sliding window technique.
+    - **collect_results.sh**: Aggregates the relative abundance for each virus from all 40 subsets and calculates the percentage of reads used in the 40 subsets from the original metagenomic sample.
