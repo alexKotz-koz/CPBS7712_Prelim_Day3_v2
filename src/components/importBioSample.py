@@ -35,6 +35,7 @@ class ImportBioSample:
         elif "test" in biosampleFile:
             biosampleDataDir = ""
 
+        # used in unit tests
         if biosampleDataDir == "":
             biosampleFileLocation = "test_data/testbiosample.fastq"
         else:

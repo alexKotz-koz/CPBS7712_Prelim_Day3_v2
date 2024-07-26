@@ -33,6 +33,9 @@ class ViromeReport:
         self.taxDir = os.path.join(dataDir, "taxonomy")
         os.makedirs(self.reportDir, exist_ok=True)
 
+    # Input: sequence file
+    # Ouput: number of reads in input file
+    # Util fx
     def getNumReads(self, fileLocation):
         with open(fileLocation, "r") as file:
             lines = file.readlines()
@@ -58,6 +61,8 @@ class ViromeReport:
             }
         return virusAbundance
 
+    # Input: biosample dataframe (containing qc data), biosample name, pdf file name (for output)
+    # Output: pdf report on qc for this run
     def createPDF(self, biosampleDf, biosampleName, ouputFileName):
         with PdfPages(ouputFileName) as pdf:
             fig, ax = plt.subplots(figsize=(12, 4))
@@ -65,7 +70,6 @@ class ViromeReport:
             ax.axis("off")
             plt.title(f"Biosample Information: {biosampleName}", fontsize=14, pad=20)
 
-            # Create table for biosample information
             biosample_table = ax.table(
                 cellText=biosampleDf.values, colLabels=biosampleDf.columns, loc="center"
             )
@@ -74,11 +78,13 @@ class ViromeReport:
             biosample_table.scale(1.2, 1.2)
             pdf.savefig(fig, bbox_inches="tight")
 
+    # Input: virus dataframe containing taxonomy data
+    # Output: Addition of the relative abundance column to the dataframe
+    # Util fx
     def addColumnsToDf(self, virusDf):
         virusDf.set_index("virusName", inplace=True)
         virusDf["Relative Viral Abundance"] = np.nan
         virusDf["# Biosample Contigs in Virus"] = np.nan
-        # virusAubndance "{name, %contigs in virus}"
         for virus, abundance in self.virusAbundance().items():
             if virus in virusDf.index:
                 virusDf.loc[virus, "# Biosample Contigs in Virus"] = abundance[
@@ -86,6 +92,8 @@ class ViromeReport:
                 ]
                 virusDf.loc[virus, "Relative Viral Abundance"] = abundance["abundance"]
 
+    # Input: constructor variables
+    # Output: report files
     def generateReport(self):
         reportFile = "virome_report.txt"
         biosampleFileName = self.biosampleFile.replace(".fastq", "")
@@ -104,7 +112,6 @@ class ViromeReport:
 
             self.addColumnsToDf(virusDf=batVirusDf)
 
-            # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
             batVirusDf = batVirusDf[batVirusDf["Relative Viral Abundance"].notna()]
 
             batVirusDf.rename(index={"virusName": "Virus Name"}, inplace=True)
@@ -118,7 +125,6 @@ class ViromeReport:
 
             self.addColumnsToDf(virusDf=NCLDVGeneDf)
 
-            # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
             NCLDVGeneDf = NCLDVGeneDf[NCLDVGeneDf["Relative Viral Abundance"].notna()]
 
             NCLDVGeneDf.rename(index={"virusName": "Virus Name"}, inplace=True)
@@ -132,7 +138,6 @@ class ViromeReport:
 
             self.addColumnsToDf(virusDf=synthDf)
 
-            # Filter the DataFrame to include only the rows where 'Relative Viral Abundance' is not NaN
             synthDf = synthDf[synthDf["Relative Viral Abundance"].notna()]
 
             synthDf.rename(index={"virusName": "Virus Name"}, inplace=True)

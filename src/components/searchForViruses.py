@@ -58,21 +58,10 @@ class SearchString:
 
     # Input: virus k-mer pool and virus object
     # Output: Contigs info object contain information about each contig k-mer that aligned (or didn't align) with each virus
-
-    # 7/23/24 21:16 | removing virus arg, doesn't look like its being used
-    # original: def createContigsInfo(self, virus, virusKmerPool)
     def createContigsInfo(self, virusKmerPool):
         contigsInfo = []
         for id, contig in enumerate(self.contigs):
             contigLen = len(contig)
-
-            """
-            7/23/24 21:19 | Replaced with call to util fx
-            original: 
-            contigKmers = {
-                contig[i : i + self.k] for i in range(contigLen - self.k + 1)
-            }
-            """
             contigKmers = utils.toKmers(self.k, contig)
 
             kmerCount = 0
@@ -129,8 +118,6 @@ class SearchString:
             logging.info(f"\t{virus['name']}:\n")
 
             createContigsStart = time.time()
-            # 7/23/24 21:16 | removed virus["name"] from self.createContigsInfo call
-            # original: contigsInfo = self.createContigsInfo(virus["name"], virusKmerPool)
             contigsInfo = self.createContigsInfo(virusKmerPool)
 
             createContigsEnd = time.time()

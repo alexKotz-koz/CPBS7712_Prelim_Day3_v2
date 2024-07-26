@@ -30,14 +30,6 @@ do
     pid=$!
     echo "Current PID: $pid"
     
-    # Run a sleep command in the background that kills the main.py process after 30 minutes
-    #(
-    #    sleep 1800
-    #    if is_running $pid; then
-    #        kill $pid
-    #    fi
-    #) &
-    
     # Wait for the main.py process to finish
     wait $pid
     

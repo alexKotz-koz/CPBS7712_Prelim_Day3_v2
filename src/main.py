@@ -133,6 +133,7 @@ def main():
         os.path.join(virusDataDir, mersCoVFile),
         os.path.join(virusDataDir, ratg13File),
         os.path.join(virusDataDir, marburgFile),
+        # These primers are used as marker sequences for the novel RmYN02 SARS-CoV-2 strain
         # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer1),
         # os.path.join(RmYN02PrimersDataDir, RmYN02RPrimer1),
         # os.path.join(RmYN02PrimersDataDir, RmYN02FPrimer2),

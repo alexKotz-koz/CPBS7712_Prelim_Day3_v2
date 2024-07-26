@@ -88,6 +88,11 @@ To characterize the virome present in a given metagenomic sample, several metric
 - execution_stats.txt: Contains the total execution time of the experiment and the total percentage of reads used, from the original metagenomic sample.
 - result.csv: Contains the taxonomic information of all viruses tested against the metagenomic sample and the aggregated relative abundance of each virus in all of the subsets of the original metagenomic sample
 
+### Example of the 2 Virome Report Files:
+
+Biosample Information: Found in src/data/reports/synthetic_biosample.pdf
+Taxonomy of Viruses Tested: Found in src/data/reports/synthetic_biosample_tax.csv
+
 ## Requirements
 - Python 3.9 or higher. 
     - This project was developed in python v3.11 and has been tested with python 3.9 thru 3.12.

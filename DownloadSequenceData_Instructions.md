@@ -13,7 +13,6 @@
     - https://www.ncbi.nlm.nih.gov/sra/SRX20364649
 - SSR12464727: Feces from Rhinolophus malayanus bats (bat sample 1)
     - https://www.ncbi.nlm.nih.gov/sra/SRX8958936%5Baccn%5D
-- SRR12432009: Rhinolophus malayanus bats: feces samples (bat sample 2)
 
 ### Download Viral Data:
 1. Download 2000 random viruses from: https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/virus?SeqType_s=Nucleotide

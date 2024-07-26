@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Removes all log files
 # Define the directories
 dir1="logs"
 dir2="output_data"
