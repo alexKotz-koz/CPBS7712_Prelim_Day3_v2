@@ -25,8 +25,8 @@ do
 done
 
 # Window and step size
-window_size=40
-step_size=20
+window_size=200
+step_size=50
 
 # Create 4 subsets of each of the 10 subsets
 for i in {1..10}

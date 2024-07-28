@@ -10,3 +10,4 @@ src/data/virus_data
 src/data/output_data/contigs.txt
 src/data/bacteria_data
 src/data/biosample_data/bat
+experimental_results

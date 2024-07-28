@@ -43,8 +43,9 @@ for subdir in "$DIR"/*; do
             total_execution_time=$((total_execution_time + execution_time))
         fi
         # Extract the number of reads in the original biosample file from the virome_report.txt file
+        echo $original_biosample_reads
         if [ -f virome_report.txt ] && [ $original_biosample_reads -eq 0 ]; then
-            original_biosample_reads=$(awk -F': ' '/Number of Reads in Original Biosample File/ {print $2}' virome_report.txt)
+            original_biosample_reads=$(awk -F': ' '/^[[:space:]]*Number of Reads in Original Biosample File/ {print $2; exit}' virome_report.txt)
         fi
     fi
 done

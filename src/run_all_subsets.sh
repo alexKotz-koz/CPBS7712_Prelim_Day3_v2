@@ -1,6 +1,5 @@
 #!/bin/bash
 original_dir=$(pwd)
-echo $(date '+%Y-%m-%d %H:%M:%S')
 cd data
 ./rm_logs.sh
 cd "$original_dir"
@@ -25,7 +24,7 @@ do
     echo ""
     start_time=$(date +%s)
     # Run main.py in the background
-    python3 main.py -k 40 -biosample "$file" &
+    python3 main.py -k 45 -biosample "$file" &
     # Get the PID of the background process
     pid=$!
     echo "Current PID: $pid"

@@ -11,7 +11,7 @@
     - https://www.ncbi.nlm.nih.gov/sra/SRX20364643[accn]
 - SRR24581281: biofilm
     - https://www.ncbi.nlm.nih.gov/sra/SRX20364649
-- SSR12464727: Feces from Rhinolophus malayanus bats (bat sample 1)
+- SSR12464727: Feces from Rhinolophus malayanus bats
     - https://www.ncbi.nlm.nih.gov/sra/SRX8958936%5Baccn%5D
 
 ### Download Viral Data:
@@ -41,7 +41,7 @@
     - PolBGeneFile = "kegg_polB.fasta"
 
 ### Download Bat Virus Data:
-1. [SARS-CoV-2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512) or by going to [NCBI Virus](https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/virus?VirusLineage_ss=Viruses,%20taxid:10239&SeqType_s=Nucleotide) and search for Accession #: NC_045512
+1. [SARS-CoV-2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512) or by going to [NCBI Virus](https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/virus?VirusLineage_ss=Viruses,%20taxid:10239&SeqType_s=Nucleotide) and search for Accession #: NC_045512. Then create a new file "SarsCoV2.fasta" under src/data/virus_data and copy the sequence and header into this file.
 2. [MERS-CoV](https://www.ncbi.nlm.nih.gov/nuccore/NC_019843.3?report=fasta), copy and paste sequence into a new file "MERS-CoV.fasta" and place the file into the src/data/virus_data sub-directory
 3. [SARS-CoV-2_RaTG13](https://www.ncbi.nlm.nih.gov/nuccore/MN996532.2?report=fasta), copy and paste sequence into a new file "RaTG13.fasta" and place the file into the src/data/virus_data sub-directory
 4. [Marburg](https://www.ncbi.nlm.nih.gov/nuccore/FJ750957.1?report=fasta), copy and paste sequence into a new file "Marburg.fasta" and place the file into the src/data/virus_data sub-directory
