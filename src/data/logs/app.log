@@ -1,0 +1,55 @@
+Main: 
+	BioSample File: synthetic
+	Size of K = 5
+
+Import Viruses: 
+	There are 3 viruses in this dataset
+
+Quality Control: 
+	# of cleaned reads: 4
+	Average read length: 9.5
+	Minimum read length: 7
+	Maximum read length: 13
+Time Stamp: Reads to Kmers finished in 0.00019502639770507812
+Time Stamp: DeBruijn Graph finished in 1.71661376953125e-05
+
+Create Contigs: 
+	Number of start nodes: 4
+	Number of end nodes: 4
+	Average contig length: 9.5
+	Minimum contig length: 7
+	Maximum contig length: 13
+	Total number of contigs: [4]
+Time Stamp: Create Contigs finished in 0.00034117698669433594
+
+Search For Viruses:
+
+	Search String Logging
+
+
+	Virus To Kmers: 0.00011706352233886719.
+		*Note: This creates kmer pools for all viruses before creating the contigs for each individual virus.
+	DEF virus:
+
+
+	Create Contigs: 2.09808349609375e-05
+		3 contigs align with DEF virus 
+		Virus DEF virus split time: 4.696846008300781e-05
+		Virus: DEF virus length: 6bp
+	GHI virus:
+
+
+	Create Contigs: 0.0007622241973876953
+		4 contigs align with GHI virus 
+		Virus GHI virus split time: 0.0008041858673095703
+		Virus: GHI virus length: 74bp
+	ABC virus:
+
+
+	Create Contigs: 0.0022306442260742188
+		4 contigs align with ABC virus 
+		Virus ABC virus split time: 0.002273082733154297
+		Virus: ABC virus length: 648bp
+Time Stamp: Find Viruses finished in 0.014628887176513672
+Project execution time: 0.16104674339294434
+____________________________________________________________________

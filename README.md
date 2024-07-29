@@ -82,9 +82,9 @@ To characterize the virome present in a given metagenomic sample, several metric
 - Located in the csv file under src/data/reports
 4. Quality control metrics: Information regarding the quality control of each metagenomic sample.
 - Located in the pdf file under src/data/reports
-5. Number of reads in the original biosample file. This is used in combination with item 6 in this list, to demonstrated the total number of reads used in the experiement.
+5. Number of reads in the original biosample file. This is used in combination with item 6 in this list, to demonstrat the total number of reads used in the experiement.
 - Located in the pdf file under src/data/reports
-6. Experimental Results: Results for each experiment run can be found under experiemental_results. Each 'experiement' is the result of executing run_all_subsets.sh (located under src/) for each of the metagenomic samples used in the development of this pipeline.
+6. Experimental Results: Results for each experiment run can be found under experiemental_results. Each 'experiment' is the result of executing run_all_subsets.sh (located under src/) for each of the metagenomic samples used in the development of this pipeline.
 - execution_stats.txt: Contains the total execution time of the experiment and the total percentage of reads used, from the original metagenomic sample.
 - result.csv: Contains the taxonomic information of all viruses tested against the metagenomic sample and the aggregated relative abundance of each virus in all of the subsets of the original metagenomic sample
 
@@ -106,5 +106,40 @@ grep -o '@' filname | wc -l
 ```
 - Automation Scripts Include:
     - **run_all_subsets.sh**: Executes the metagenomic pipeline on all 40 subsets of the metagenomic sample, generating results for each run in the experiemental_results directory at the root of the project.
+        - Note on the instructions below: Please change to the script directory (cd ...) before executing these scripts.
+        - To execute this script, first follow the download sequence data instructions (located in the DownloadSequenceData_Instructions.md file). Then adjust the file path for the biosample directory on line 8 of the run_all_subsets.sh. 
+        - Then make the run_all_subsets.sh an executable with global permissions:
+        ```sh
+        chmod +x run_all_subsets.sh
+        ```
+        - Finally, execute the script:
+        ```sh
+        ./run_all_subsets.sh
+        ```
+        - Note this script will take 30 minutes to 2 hours to run, based on the size of the subsets, size of k, and hardware.
+
     - **subset_biosample.sh**: Creates 40 subsets of the original metagenomic sample via a sliding window technique.
+        - To execute this script and create subsets of the original metagenomic sample:
+        1. Make the file executable:
+        ```sh
+        chmod +x subset_biosample.sh
+        ```
+        2. Create the directories to dump the subsets into:
+        - Recommended file structure:
+            - src/data/biosample_data/<name of biosample 1>
+                - src/data/biosample_data/<name of biosample 1>/small_subsets
+        3. Execute the script:
+        ```sh
+        ./subset_biosample.sh <file location of original biosample.fasta file> <file location of output files>
+        ```
+        - Example output file arg: src/data/biosample_data/bat/bat1 (bat1 being the prefix to all subset files)
     - **collect_results.sh**: Aggregates the relative abundance for each virus from all 40 subsets and calculates the percentage of reads used in the 40 subsets from the original metagenomic sample.
+        - Note: This file assumes that 40 subset fastq files were created, if this number is different, please change the numerator on line 58.
+        1. Make the file executable with global permissions:
+        ```sh
+        chmod +x collect_results.sh
+        ```
+        2. Execute the file:
+        ```sh
+        ./collect_results.sh
+        ```
