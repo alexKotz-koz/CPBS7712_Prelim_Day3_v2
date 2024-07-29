@@ -1,24 +1,22 @@
 #!/bin/bash
 
+# Note: This file expects the experimental_results directory to be full (post execution of ./run_all_subsets.sh)
+# The script will fail if experiemental_results is empty
+
+
 # Get the current directory
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Create a temporary file to store all the data
 temp_file=$(mktemp)
 
-# Create a new file to store the results
 result_file="$DIR/result.csv"
-
-# Create a new file to store the execution times
 execution_stats_file="$DIR/execution_stats.txt"
 
 # Variable to handle header
 header_handled=false
 
-# Variable to store total execution time
 total_execution_time=0
-
-# Variable to store the number of reads in the original biosample file
 original_biosample_reads=0
 
 # Iterate through each subdirectory

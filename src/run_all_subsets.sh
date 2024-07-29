@@ -4,12 +4,10 @@ cd data
 ./rm_logs.sh
 cd "$original_dir"
 
-# Directory where the subset files are located
+# Directory where the subset files are located, can change biosample_data subdir
 dir="data/biosample_data/cryoconite/small_subsets"
 
-echo $dir
-
-# Function to check if a process is running
+# Function to check if a process is running. Use in for loop when a time constraint per run is required
 is_running() {
     ps -p $1 > /dev/null 2>&1
 }
@@ -23,7 +21,8 @@ do
     echo $file
     echo ""
     start_time=$(date +%s)
-    # Run main.py in the background
+
+    # Run main.py in the background, can change size of k
     python3 main.py -k 45 -biosample "$file" &
     # Get the PID of the background process
     pid=$!
@@ -32,6 +31,7 @@ do
     # Wait for the main.py process to finish
     wait $pid
     
+    # uncomment if a time constraint is required
     # If the main.py process was killed, its exit status will be 137
     #if [ $? -eq 137 ]; then
     #    echo "Execution of main.py on $file exceeded the time limit and was terminated." | tee -a src/data/logs/app.log
@@ -44,8 +44,9 @@ do
     echo "Date: $(date '+%Y-%m-%d %H:%M:%S')" | tee -a app.log
     echo "Total execution time of the script: $execution_time seconds." | tee -a app.log
 
+    # collect results
     cd "$original_dir"
-    cd ../  # Go up two levels to the root directory
+    cd ../  
     cd experimental_results
     filename=$(basename "$file" .fastq)
     if mkdir "$filename"; then

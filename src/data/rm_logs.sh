@@ -1,14 +1,14 @@
 #!/bin/bash
 # Removes all log files
-# Define the directories
-dir1="logs"
-dir2="output_data"
-dir3="reports"
+
+logs="logs"
+output_data="output_data"
+reports="reports"
 
 # Delete all files in directory 1
-rm -f "$dir1"/*
+rm -f "$logs"/*
 
 # Delete all files in directory 2
-rm -f "$dir2"/*
+rm -f "$output_data"/*
 
-rm -f "$dir3"/*
+rm -f "$reports"/*
