@@ -1,1 +1,0 @@
-["DEF virus", {"contigId": 2, "contig": "CTAGCTTATC", "length": 10, "v-kmers": [{"GGATC": {"indexOfVKmerInContig": [5, 10], "hammingDistance": 2, "kmerLength": 5}}], "kmerCount": 1}, {"contigId": 3, "contig": "AGCCTCG", "length": 7, "v-kmers": [{"GGATC": {"indexOfVKmerInContig": [1, 6], "hammingDistance": 2, "kmerLength": 5}}], "kmerCount": 1}]
